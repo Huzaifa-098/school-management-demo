@@ -1,0 +1,3168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Management System - Complete Proposal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        /* Cover Page */
+        .cover-page {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 50px;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cover-page::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: move 20s linear infinite;
+        }
+        
+        @keyframes move {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        .cover-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cover-logo {
+            font-size: 5em;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+
+
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .cover-page h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: 700;
+        }
+        
+        .cover-page h2 {
+            font-size: 2em;
+            margin-bottom: 40px;
+            font-weight: 300;
+            opacity: 0.95;
+        }
+        
+        .cover-page .subtitle {
+            font-size: 1.3em;
+            margin-top: 30px;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+        
+        .cover-page .date {
+            margin-top: 50px;
+            font-size: 1.1em;
+            opacity: 0.8;
+        }
+        
+        .cover-page .company-info {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 2px solid rgba(255,255,255,0.3);
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        /* Table of Contents Page */
+        .toc-page {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            
+            padding: 40px 50px;
+            page-break-after: always;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        
+        .toc-container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            padding: 40px;
+            margin-top: 20px;
+        }
+        
+        .toc-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        .toc-header h1 {
+            color: #667eea;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            border: none;
+            padding: 0;
+        }
+        
+        .toc-header p {
+            font-size: 1em;
+            color: #666;
+            margin: 0;
+        }
+        
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .toc-list-item {
+            padding: 8px 0;
+            border-bottom: 1px dotted #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            transition: all 0.2s ease;
+        }
+        
+        .toc-list-item:last-child {
+            border-bottom: none;
+        }
+        
+        .toc-list-item:hover {
+            background: #f8f9ff;
+            padding-left: 10px;
+        }
+        
+        .toc-list-item a {
+            text-decoration: none;
+            color: #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            width: 100%;
+            flex: 1;
+        }
+        
+        .toc-item-title {
+            font-size: 1em;
+            font-weight: 400;
+            color: #333;
+            flex: 1;
+        }
+        
+        .toc-item-title strong {
+            font-weight: 600;
+            color: #667eea;
+        }
+        
+        .toc-item-dots {
+            flex: 1;
+            border-bottom: 1px dotted #999;
+            margin: 0 10px;
+            height: 1px;
+            align-self: flex-end;
+        }
+        
+        .toc-item-page {
+            font-size: 0.95em;
+            color: #667eea;
+            font-weight: 500;
+            min-width: 60px;
+            text-align: right;
+        }
+        
+        .toc-sub-item {
+            padding: 5px 0 5px 30px;
+            font-size: 0.9em;
+            color: #666;
+            border-bottom: 1px dotted #eee;
+        }
+        
+        .toc-sub-item:last-child {
+            border-bottom: none;
+        }
+        
+        .toc-sub-item a {
+            color: #666;
+        }
+        
+        .toc-sub-item:hover {
+            background: #f8f9ff;
+            padding-left: 35px;
+        }
+        
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        section[id] {
+            scroll-margin-top: 20px;
+        }
+        
+        /* Page Break */
+        .page-break {
+            page-break-before: always;
+            border-top: 3px solid #667eea;
+            margin-top: 50px;
+            padding-top: 30px;
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 50px;
+            page-break-inside: avoid;
+        }
+        
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            color: #764ba2;
+            font-size: 2em;
+            margin: 40px 0 20px 0;
+            padding-left: 15px;
+            border-left: 5px solid #764ba2;
+        }
+        
+        h3 {
+            color: #555;
+            font-size: 1.5em;
+            margin: 30px 0 15px 0;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+            font-size: 1.1em;
+        }
+        
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+            font-size: 1.05em;
+        }
+        
+        /* Component Card */
+        .component-card {
+            background: #f9f9f9;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 30px 0;
+            page-break-inside: avoid;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .component-card h3 {
+            color: #667eea;
+            margin-top: 0;
+            font-size: 1.8em;
+        }
+        
+        /* UI Mockup Styles */
+        .ui-mockup {
+            width: 100%;
+            background: #f5f5f5;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            margin: 20px 0;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .ui-mockup-header {
+            background: white;
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .ui-mockup-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .ui-mockup-icons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .ui-mockup-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .ui-mockup-bell {
+            background: #667eea;
+            position: relative;
+        }
+        
+        .ui-mockup-bell::after {
+            content: "10";
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: red;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 0.7em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .ui-mockup-user {
+            background: #667eea;
+        }
+        
+        .ui-mockup-sidebar {
+            background: #1e3a5f;
+            color: white;
+            width: 250px;
+            padding: 20px;
+            float: left;
+            min-height: 600px;
+        }
+        
+        .ui-mockup-content {
+            margin-left: 250px;
+            background: white;
+            padding: 20px;
+            min-height: 600px;
+        }
+        
+        .ui-mockup-banner {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .ui-mockup-banner h2 {
+            margin: 0 0 10px 0;
+            font-size: 1.8em;
+        }
+        
+        .ui-mockup-banner p {
+            margin: 0;
+            opacity: 0.9;
+        }
+        
+        .ui-mockup-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .ui-mockup-btn {
+            background: white;
+            color: #667eea;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        
+        .ui-mockup-cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .ui-mockup-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-top: 4px solid;
+            border-radius: 5px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .ui-mockup-card.purple { border-top-color: #667eea; }
+        .ui-mockup-card.green { border-top-color: #28a745; }
+        .ui-mockup-card.orange { border-top-color: #ff9800; }
+        .ui-mockup-card.blue { border-top-color: #2196f3; }
+        .ui-mockup-card.red { border-top-color: #f44336; }
+        
+        .ui-mockup-card h3 {
+            font-size: 2em;
+            margin: 10px 0;
+            color: #333;
+        }
+        
+        .ui-mockup-card p {
+            color: #666;
+            font-size: 0.9em;
+            margin: 5px 0;
+        }
+        
+        .ui-mockup-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+        
+        .ui-mockup-table th {
+            background: #f5f5f5;
+            padding: 12px;
+            text-align: left;
+            border-bottom: 2px solid #ddd;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .ui-mockup-table td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .ui-mockup-table tr:hover {
+            background: #f9f9f9;
+        }
+        
+        .ui-mockup-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+        
+        .ui-mockup-badge.active {
+            background: #28a745;
+            color: white;
+        }
+        
+        .ui-mockup-badge.pending {
+            background: #ff9800;
+            color: white;
+        }
+        
+        .ui-mockup-badge.inactive {
+            background: #ccc;
+            color: #666;
+        }
+        
+        .ui-mockup-filters {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .ui-mockup-select {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+        
+        .ui-mockup-btn-primary {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .ui-mockup-btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 1px solid #667eea;
+            padding: 8px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .ui-mockup-nav-item {
+            padding: 12px;
+            margin: 5px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .ui-mockup-nav-item.active {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .ui-mockup-nav-item:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .ui-mockup-chat {
+            display: flex;
+            height: 500px;
+        }
+        
+        .ui-mockup-chat-sidebar {
+            width: 300px;
+            background: #f9f9f9;
+            border-right: 1px solid #ddd;
+            padding: 15px;
+        }
+        
+        .ui-mockup-chat-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .ui-mockup-chat-header {
+            background: #28a745;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .ui-mockup-chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #f9f9f9;
+        }
+        
+        .ui-mockup-message {
+            margin: 15px 0;
+            padding: 10px 15px;
+            border-radius: 15px;
+            max-width: 70%;
+        }
+        
+        .ui-mockup-message.sent {
+            background: #667eea;
+            color: white;
+            margin-left: auto;
+            text-align: right;
+        }
+        
+        .ui-mockup-message.received {
+            background: white;
+            color: #333;
+        }
+        
+        .ui-mockup-chat-input {
+            padding: 15px;
+            background: white;
+            border-top: 1px solid #ddd;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .ui-mockup-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+        }
+        
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        
+        /* Back to Top Button */
+        #back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #back-to-top:hover {
+            background: #764ba2;
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+        
+        #back-to-top:active {
+            transform: scale(0.95);
+        }
+        
+        #back-to-top.show {
+            display: flex;
+        }
+        
+        .feature-list {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        
+        .feature-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .feature-list li::before {
+            content: "✓ ";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        
+        th {
+            background: #667eea;
+            color: white;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        /* Highlight Box */
+        .highlight-box {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .highlight-box h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        
+        /* Technical Specs */
+        .tech-specs {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .tech-card {
+            background: #f0f0f0;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        
+        .tech-card h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #333;
+            color: white;
+            padding: 30px 50px;
+            text-align: center;
+        }
+        
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .whatsapp-icon {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #25D366;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(37, 211, 102, 0.3);
+        }
+        
+        .whatsapp-icon:hover {
+            background: #20BA5A;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.5);
+            text-decoration: none;
+        }
+        
+        .whatsapp-icon::before {
+            content: "💬";
+            font-size: 1.3em;
+        }
+        
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .page-break {
+                page-break-before: always;
+            }
+            
+            .component-card {
+                page-break-inside: avoid;
+            }
+        }
+        
+        .badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Cover Page -->
+    <!-- <div class="cover-page">
+        <div class="cover-content">
+            <div class="cover-logo">🎓</div>
+            <h1>School Management System</h1>
+            <h2>Complete Enterprise Solution</h2>
+            <p class="subtitle">Comprehensive Proposal Document</p>
+            <p class="date">Date: <span id="current-date"></span></p>
+            <div class="company-info">
+                <p>Presented by: Your Company Name</p>
+                <p>Contact: info@yourcompany.com | +92 XXX XXXXXXX</p>
+            </div>
+        </div>
+    </div> -->
+    <div style="display: flex; justify-content: center; align-items: center; background-color: #667eea; color: white !important; padding: 20px;">
+
+        <div class="cover-logo">🎓</div>
+        <h1 style="color: white !important;">School Management System</h1>
+    </div>
+    
+
+    <!-- Table of Contents Page -->
+    <div class="toc-page">
+        <div class="toc-container">
+            <div class="toc-header">
+                <h1>Table of Contents</h1>
+                <p>Click on any item to navigate directly to its details</p>
+            </div>
+            
+            <ul class="toc-list">
+                <li class="toc-list-item">
+                    <a href="#executive-summary">
+                        <span class="toc-item-title"><strong>Executive Summary</strong></span>
+                        <span class="toc-item-dots"></span>
+                        <span class="toc-item-page">1</span>
+                    </a>
+                </li>
+                <li class="toc-list-item">
+                    <a href="#system-overview">
+                        <span class="toc-item-title"><strong>System Overview</strong></span>
+                        <span class="toc-item-dots"></span>
+                        <span class="toc-item-page">2</span>
+                    </a>
+                </li>
+                <li class="toc-list-item">
+                    <a href="#auth-login">
+                        <span class="toc-item-title"><strong>1. Authentication & Login System</strong></span>
+                        <span class="toc-item-dots"></span>
+                        <span class="toc-item-page">3</span>
+                    </a>
+                </li>
+                <li class="toc-list-item">
+                    <a href="#dashboard">
+                        <span class="toc-item-title"><strong>2. Dashboard System</strong></span>
+                        <span class="toc-item-dots"></span>
+                        <span class="toc-item-page">4</span>
+                    </a>
+                </li>
+                <li class="toc-list-item">
+                    <a href="#student-management">
+                        <span class="toc-item-title"><strong>3. Student Management</strong></span>
+                        <span class="toc-item-dots"></span>
+                        <span class="toc-item-page">5</span>
+                    </a>
+                </li>
+                <li class="toc-list-item">
+                    <a href="#teacher-management">
+                        <span class="toc-item-title"><strong>4. Teacher Management</strong></span>
+                        <span class="toc-item-dots"></span>
+                        <span class="toc-item-page">6</span>
+                    </a>
+                </li>
+                <li class="toc-list-item">
+                    <a href="#class-management">
+                        <span class="toc-item-title"><strong>5. Class Management</strong></span>
+                        <span class="toc-item-dots"></span>
+                        <span class="toc-item-page">7</span>
+                    </a>
+                </li>
+                <li class="toc-list-item">
+                    <a href="#course-management">
+                        <span class="toc-item-title"><strong>6. Course Management</strong></span>
+                        <span class="toc-item-dots"></span>
+                        <span class="toc-item-page">8</span>
+                    </a>
+                </li>
+                <li class="toc-list-item">
+                    <a href="#attendance-management">
+                        <span class="toc-item-title"><strong>7. Attendance Management</strong></span>
+                        <span class="toc-item-dots"></span>
+                        <span class="toc-item-page">9</span>
+                    </a>
+                </li>
+                <li class="toc-list-item">
+                    <a href="#exam-management">
+                        <span class="toc-item-title"><strong>8. Exam Management</strong></span>
+                        <span class="toc-item-dots"></span>
+                        <span class="toc-item-page">10</span>
+                    </a>
+                </li>
+                <li class="toc-list-item">
+                    <a href="#fee-management">
+                        <span class="toc-item-title"><strong>9. Fee Management</strong></span>
+                        <span class="toc-item-dots"></span>
+                        <span class="toc-item-page">11</span>
+                    </a>
+                </li>
+                <li class="toc-list-item">
+                    <a href="#easypaisa-payment">
+                        <span class="toc-item-title"><strong>9.1. Online Fee Payment via Easypaisa</strong></span>
+                        <span class="toc-item-dots"></span>
+                        <span class="toc-item-page">12</span>
+                    </a>
+                </li>
+                <li class="toc-list-item">
+                    <a href="#financial-dashboard">
+                        <span class="toc-item-title"><strong>10. Financial Dashboard</strong></span>
+                        <span class="toc-item-dots"></span>
+                        <span class="toc-item-page">13</span>
+                    </a>
+                </li>
+                <li class="toc-list-item">
+                    <a href="#financial-management">
+                        <span class="toc-item-title"><strong>11. Financial Management</strong></span>
+                        <span class="toc-item-dots"></span>
+                        <span class="toc-item-page">14</span>
+                    </a>
+                </li>
+                <li class="toc-list-item">
+                    <a href="#payroll-management">
+                        <span class="toc-item-title"><strong>12. Payroll Management</strong></span>
+                        <span class="toc-item-dots"></span>
+                        <span class="toc-item-page">15</span>
+                    </a>
+                </li>
+                <li class="toc-list-item">
+                    <a href="#leave-management">
+                        <span class="toc-item-title"><strong>13. Leave Management</strong></span>
+                        <span class="toc-item-dots"></span>
+                        <span class="toc-item-page">16</span>
+                    </a>
+                </li>
+                <li class="toc-list-item">
+                    <a href="#chat-system">
+                        <span class="toc-item-title"><strong>14. Real-Time Chat System</strong></span>
+                        <span class="toc-item-dots"></span>
+                        <span class="toc-item-page">17</span>
+                    </a>
+                </li>
+                <li class="toc-list-item">
+                    <a href="#notification-management">
+                        <span class="toc-item-title"><strong>15. Notification Management</strong></span>
+                        <span class="toc-item-dots"></span>
+                        <span class="toc-item-page">18</span>
+                    </a>
+                </li>
+                <li class="toc-list-item">
+                    <a href="#announcement-management">
+                        <span class="toc-item-title"><strong>16. Announcement Management</strong></span>
+                        <span class="toc-item-dots"></span>
+                        <span class="toc-item-page">19</span>
+                    </a>
+                </li>
+                <li class="toc-list-item">
+                    <a href="#reports">
+                        <span class="toc-item-title"><strong>17. Reports & Analytics</strong></span>
+                        <span class="toc-item-dots"></span>
+                        <span class="toc-item-page">20</span>
+                    </a>
+                </li>
+                <li class="toc-list-item">
+                    <a href="#profile">
+                        <span class="toc-item-title"><strong>18. Profile Management</strong></span>
+                        <span class="toc-item-dots"></span>
+                        <span class="toc-item-page">21</span>
+                    </a>
+                </li>
+                <li class="toc-list-item">
+                    <a href="#all-users">
+                        <span class="toc-item-title"><strong>19. All Users Management</strong></span>
+                        <span class="toc-item-dots"></span>
+                        <span class="toc-item-page">22</span>
+                    </a>
+                </li>
+                <li class="toc-list-item">
+                    <a href="#benefits">
+                        <span class="toc-item-title"><strong>System Benefits</strong></span>
+                        <span class="toc-item-dots"></span>
+                        <span class="toc-item-page">23</span>
+                    </a>
+                </li>
+                <li class="toc-list-item">
+                    <a href="#technical-specs">
+                        <span class="toc-item-title"><strong>Technical Specifications</strong></span>
+                        <span class="toc-item-dots"></span>
+                        <span class="toc-item-page">24</span>
+                    </a>
+                </li>
+                <li class="toc-list-item">
+                    <a href="#implementation">
+                        <span class="toc-item-title"><strong>Implementation Timeline</strong></span>
+                        <span class="toc-item-dots"></span>
+                        <span class="toc-item-page">25</span>
+                    </a>
+                </li>
+                <li class="toc-list-item">
+                    <a href="#support">
+                        <span class="toc-item-title"><strong>Support & Maintenance</strong></span>
+                        <span class="toc-item-dots"></span>
+                        <span class="toc-item-page">26</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Executive Summary -->
+        <section id="executive-summary">
+            <h1>Executive Summary</h1>
+            <p>
+                This proposal presents a comprehensive <strong>School Management System</strong> designed to streamline 
+                all aspects of educational institution management. Our solution provides a complete digital transformation 
+                for schools, enabling efficient management of students, teachers, academics, finances, and communications 
+                through a single, integrated platform.
+            </p>
+            <p>
+                The system is built using modern web technologies, ensuring scalability, security, and ease of use. 
+                It offers role-based access control, real-time communication, comprehensive reporting, and intuitive 
+                dashboards for administrators, teachers, students, and parents.
+            </p>
+            
+            <div class="highlight-box">
+                <h4>Key Highlights</h4>
+                <ul>
+                    <li><strong>Complete Solution:</strong> All-in-one platform covering all school operations</li>
+                    <li><strong>Modern Technology:</strong> Built with Angular 19 and Node.js for optimal performance</li>
+                    <li><strong>Secure & Scalable:</strong> Enterprise-grade security with role-based access control</li>
+                    <li><strong>User-Friendly:</strong> Intuitive interface designed for all user types</li>
+                    <li><strong>Real-Time Features:</strong> Live chat, notifications, and instant updates</li>
+                    <li><strong>Comprehensive Reporting:</strong> Advanced analytics and export capabilities</li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="page-break"></div>
+
+        <!-- System Overview -->
+        <section id="system-overview">
+            <h1>System Overview</h1>
+            <h2>Architecture & Technology Stack</h2>
+            
+            <div class="tech-specs">
+                <div class="tech-card">
+                    <h4>Frontend Technology</h4>
+                    <ul>
+                        <li>Angular 19 (Latest)</li>
+                        <li>TypeScript</li>
+                        <li>Material Design</li>
+                        <li>Chart.js for Analytics</li>
+                        <li>Responsive Design</li>
+                    </ul>
+                </div>
+                
+                <div class="tech-card">
+                    <h4>Backend Technology</h4>
+                    <ul>
+                        <li>Node.js & Express.js</li>
+                        <li>MongoDB Database</li>
+                        <li>JWT Authentication</li>
+                        <li>RESTful API</li>
+                        <li>Socket.io (Real-time)</li>
+                    </ul>
+                </div>
+                
+                <div class="tech-card">
+                    <h4>Security Features</h4>
+                    <ul>
+                        <li>Role-Based Access Control</li>
+                        <li>Password Encryption (bcrypt)</li>
+                        <li>JWT Token Security</li>
+                        <li>Data Validation</li>
+                        <li>XSS & SQL Injection Protection</li>
+                    </ul>
+                </div>
+                
+                <div class="tech-card">
+                    <h4>Key Features</h4>
+                    <ul>
+                        <li>Real-time Chat System</li>
+                        <li>Email Notifications</li>
+                        <li>File Upload & Management</li>
+                        <li>Advanced Reporting</li>
+                        <li>Dashboard Analytics</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <div class="page-break"></div>
+
+        <!-- Component 1: Authentication & Login -->
+        <section>
+            <h1>System Components</h1>
+            
+            <div class="component-card" id="auth-login">
+                <h3>1. Authentication & Login System</h3>
+                <div class="ui-mockup" style="max-width: 500px; margin: 0 auto;">
+                    <div style="padding: 40px; background: white; text-align: center;">
+                        <h2 style="color: #667eea; margin-bottom: 30px;">🎓 School Management System</h2>
+                        <div style="background: #f9f9f9; padding: 30px; border-radius: 10px; margin-bottom: 20px;">
+                            <h3 style="margin-bottom: 20px;">Login</h3>
+                            <input type="email" placeholder="Email Address" style="width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px;">
+                            <input type="password" placeholder="Password" style="width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px;">
+                            <button class="ui-mockup-btn-primary" style="width: 100%; padding: 12px; margin-bottom: 10px;">Login</button>
+                            <div style="font-size: 0.9em; color: #666;">
+                                <div>Role: <select style="padding: 5px; border: 1px solid #ddd; border-radius: 3px;"><option>Admin</option><option>Teacher</option><option>Student</option></select></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h4>Description:</h4>
+                <p>
+                    Secure authentication system with role-based login. Users can log in as Super Admin, Admin, Teacher, 
+                    or Student. The system uses JWT (JSON Web Tokens) for secure session management and includes password 
+                    encryption for maximum security.
+                </p>
+                
+                <h4>Key Features:</h4>
+                <div class="feature-list">
+                    <ul>
+                        <li>Multi-role login (Super Admin, Admin, Teacher, Student)</li>
+                        <li>JWT-based secure authentication</li>
+                        <li>Password encryption with bcrypt</li>
+                        <li>Session management</li>
+                        <li>Remember me functionality</li>
+                        <li>Forgot password feature</li>
+                        <li>Role-based dashboard redirection</li>
+                        <li>Secure token storage</li>
+                    </ul>
+                </div>
+                
+                <h4>User Roles:</h4>
+                <ul>
+                    <li><strong>Super Admin:</strong> Full system access and configuration</li>
+                    <li><strong>Admin:</strong> School management and administration</li>
+                    <li><strong>Teacher:</strong> Class and student management</li>
+                    <li><strong>Student:</strong> Personal academic information access</li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="page-break"></div>
+
+        <!-- Component 2: Dashboard -->
+        <section>
+            <div class="component-card" id="dashboard">
+                <h3>2. Dashboard System</h3>
+                <div class="ui-mockup">
+                    <div class="ui-mockup-header">
+                        <div class="ui-mockup-title">Dashboard</div>
+                        <div class="ui-mockup-icons">
+                            <div class="ui-mockup-icon ui-mockup-bell">🔔</div>
+                            <div class="ui-mockup-icon ui-mockup-user">U</div>
+                        </div>
+                    </div>
+                    <div class="ui-mockup-banner" style="margin: 20px;">
+                        <h2>Welcome to School Management System</h2>
+                        <p>Here's an overview of your school's performance and statistics</p>
+                    </div>
+                    <div class="ui-mockup-cards" style="margin: 20px;">
+                        <div class="ui-mockup-card green">
+                            <h3>35</h3>
+                            <p>Total Students</p>
+                        </div>
+                        <div class="ui-mockup-card blue">
+                            <h3>98</h3>
+                            <p>Total Teachers</p>
+                        </div>
+                        <div class="ui-mockup-card orange">
+                            <h3>89</h3>
+                            <p>Total Classes</p>
+                        </div>
+                        <div class="ui-mockup-card purple">
+                            <h3>15</h3>
+                            <p>Total Courses</p>
+                        </div>
+                    </div>
+                    <div style="padding: 20px; background: white; margin: 20px; border-radius: 5px;">
+                        <h4 style="margin-bottom: 15px;">Recent Students</h4>
+                        <div style="display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #eee;">
+                            <span>Ahmad Khan (STU20250035 • 1st-A)</span>
+                            <span class="ui-mockup-badge active">ACTIVE</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #eee;">
+                            <span>Khadija Hassan (S10 • 1st-A)</span>
+                            <span class="ui-mockup-badge active">ACTIVE</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 10px;">
+                            <span>Ibrahim Malik (S09 • 9th-A)</span>
+                            <span class="ui-mockup-badge active">ACTIVE</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <h4>Description:</h4>
+                <p>
+                    Comprehensive dashboard providing real-time overview of school operations. Different dashboards are 
+                    available for each user role, showing relevant statistics, charts, and quick access to important features.
+                </p>
+                
+                <h4>Key Features:</h4>
+                <div class="feature-list">
+                    <ul>
+                        <li>Role-specific dashboards (Admin, Teacher, Student)</li>
+                        <li>Real-time statistics and metrics</li>
+                        <li>Interactive charts and graphs</li>
+                        <li>Quick access to frequently used features</li>
+                        <li>Recent activities and notifications</li>
+                        <li>Fee collection overview</li>
+                        <li>Attendance statistics</li>
+                        <li>Academic performance indicators</li>
+                        <li>Financial summaries</li>
+                        <li>Class distribution charts</li>
+                    </ul>
+                </div>
+                
+                <h4>Dashboard Sections:</h4>
+                <ul>
+                    <li><strong>Overview Cards:</strong> Total students, teachers, classes, courses</li>
+                    <li><strong>Fee Collection:</strong> Total collected, pending, overdue fees</li>
+                    <li><strong>Attendance Charts:</strong> Visual representation of attendance trends</li>
+                    <li><strong>Class Distribution:</strong> Student distribution across classes</li>
+                    <li><strong>Recent Activities:</strong> Latest updates and notifications</li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="page-break"></div>
+
+        <!-- Component 3: Student Management -->
+        <section>
+            <div class="component-card" id="student-management">
+                <h3>3. Student Management</h3>
+                <div class="ui-mockup">
+                    <div class="ui-mockup-header">
+                        <div class="ui-mockup-title">Students</div>
+                        <div class="ui-mockup-icons">
+                            <div class="ui-mockup-icon ui-mockup-bell">🔔</div>
+                            <div class="ui-mockup-icon ui-mockup-user">U</div>
+                        </div>
+                    </div>
+                    <div class="ui-mockup-banner" style="margin: 20px;">
+                        <h2>📚 Student Management</h2>
+                        <p>Manage all students, their information and academic records</p>
+                        <div class="ui-mockup-buttons">
+                            <button class="ui-mockup-btn">Export CSV</button>
+                            <button class="ui-mockup-btn">Export PDF</button>
+                            <button class="ui-mockup-btn">+ Add Record</button>
+                            <button class="ui-mockup-btn">Refresh</button>
+                        </div>
+                    </div>
+                    <div class="ui-mockup-filters" style="margin: 20px;">
+                        <select class="ui-mockup-select"><option>All Class</option></select>
+                        <select class="ui-mockup-select"><option>All Gender</option></select>
+                        <select class="ui-mockup-select"><option>All Status</option></select>
+                        <button class="ui-mockup-btn-primary">Apply Filters</button>
+                        <button class="ui-mockup-btn-secondary">Clear Filters</button>
+                    </div>
+                    <div class="ui-mockup-cards" style="margin: 20px;">
+                        <div class="ui-mockup-card purple"><h3>10</h3><p>Total Students</p></div>
+                        <div class="ui-mockup-card green"><h3>0</h3><p>Active Students</p></div>
+                        <div class="ui-mockup-card blue"><h3>9</h3><p>Classes</p></div>
+                        <div class="ui-mockup-card orange"><h3>0</h3><p>New Admissions</p></div>
+                    </div>
+                    <div style="padding: 20px; margin: 20px; background: white; border-radius: 5px;">
+                        <h4 style="margin-bottom: 15px;">Student Management Records (35 records)</h4>
+                        <table class="ui-mockup-table">
+                            <thead>
+                                <tr>
+                                    <th>Student ID</th><th>Roll Number</th><th>First Name</th><th>Last Name</th><th>Class</th><th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>STU20250035</td><td>R175</td><td>Ahmad</td><td>Khan</td><td>1st-A</td><td><span class="ui-mockup-badge active">Active</span></td></tr>
+                                <tr><td>S10</td><td>R10</td><td>Khadija</td><td>Hassan</td><td>1st-A</td><td><span class="ui-mockup-badge active">Active</span></td></tr>
+                                <tr><td>S09</td><td>R09</td><td>Ibrahim</td><td>Malik</td><td>9th-A</td><td><span class="ui-mockup-badge active">Active</span></td></tr>
+                            </tbody>
+                        </table>
+                        <div style="margin-top: 15px; text-align: center; color: #666;">Showing 1 to 10 of 35 records | Page 1 of 4</div>
+                    </div>
+                </div>
+                
+                <h4>Description:</h4>
+                <p>
+                    Complete student information management system. Administrators can add, edit, view, and manage all 
+                    student records including personal information, academic details, class assignments, and parent information.
+                </p>
+                
+                <h4>Key Features:</h4>
+                <div class="feature-list">
+                    <ul>
+                        <li>Add, edit, and delete student records</li>
+                        <li>Student profile with photo upload</li>
+                        <li>Class assignment and management</li>
+                        <li>Roll number assignment</li>
+                        <li>Parent/guardian information</li>
+                        <li>Contact details management</li>
+                        <li>Date of birth and age calculation</li>
+                        <li>Gender and address information</li>
+                        <li>Student status (Active/Inactive)</li>
+                        <li>Bulk student import</li>
+                        <li>Student search and filtering</li>
+                        <li>Student ID generation</li>
+                        <li>Academic history tracking</li>
+                    </ul>
+                </div>
+                
+                <h4>Student Information Includes:</h4>
+                <ul>
+                    <li>Personal details (name, DOB, gender, address)</li>
+                    <li>Contact information (phone, email)</li>
+                    <li>Parent/guardian details</li>
+                    <li>Class and section assignment</li>
+                    <li>Roll number and student ID</li>
+                    <li>Profile picture</li>
+                    <li>Academic records</li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="page-break"></div>
+
+        <!-- Component 4: Teacher Management -->
+        <section>
+            <div class="component-card" id="teacher-management">
+                <h3>4. Teacher Management</h3>
+                <div class="ui-mockup">
+                    <div class="ui-mockup-header">
+                        <div class="ui-mockup-title">Teachers</div>
+                        <div class="ui-mockup-icons">
+                            <div class="ui-mockup-icon ui-mockup-bell">🔔</div>
+                            <div class="ui-mockup-icon ui-mockup-user">U</div>
+                        </div>
+                    </div>
+                    <div class="ui-mockup-banner" style="margin: 20px;">
+                        <h2>👨‍🏫 Teacher Management</h2>
+                        <p>Manage all teachers, their information and assignments</p>
+                        <div class="ui-mockup-buttons">
+                            <button class="ui-mockup-btn">Export CSV</button>
+                            <button class="ui-mockup-btn">Export PDF</button>
+                            <button class="ui-mockup-btn">+ Add Record</button>
+                            <button class="ui-mockup-btn">Refresh</button>
+                        </div>
+                    </div>
+                    <div class="ui-mockup-filters" style="margin: 20px;">
+                        <select class="ui-mockup-select"><option>All Department</option></select>
+                        <select class="ui-mockup-select"><option>All Gender</option></select>
+                        <select class="ui-mockup-select"><option>All Status</option></select>
+                        <button class="ui-mockup-btn-primary">Apply Filters</button>
+                        <button class="ui-mockup-btn-secondary">Clear Filters</button>
+                    </div>
+                    <div class="ui-mockup-cards" style="margin: 20px;">
+                        <div class="ui-mockup-card purple"><h3>10</h3><p>Total Teachers</p></div>
+                        <div class="ui-mockup-card green"><h3>0</h3><p>Active Teachers</p></div>
+                        <div class="ui-mockup-card blue"><h3>10</h3><p>Departments</p></div>
+                        <div class="ui-mockup-card orange"><h3>Rs 133,500</h3><p>Average Salary</p></div>
+                    </div>
+                    <div style="padding: 20px; margin: 20px; background: white; border-radius: 5px;">
+                        <h4 style="margin-bottom: 15px;">Teacher Management Records (98 records)</h4>
+                        <table class="ui-mockup-table">
+                            <thead>
+                                <tr><th>Teacher ID</th><th>Employee ID</th><th>Name</th><th>Department</th><th>Qualification</th><th>Status</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>T90</td><td>EMP90</td><td>Teacher90 Surname90</td><td>Chemistry</td><td>Masters</td><td><span class="ui-mockup-badge active">Active</span></td></tr>
+                                <tr><td>T89</td><td>EMP89</td><td>Teacher89 Surname89</td><td>Physics</td><td>PhD</td><td><span class="ui-mockup-badge active">Active</span></td></tr>
+                                <tr><td>T88</td><td>EMP88</td><td>Teacher88 Surname88</td><td>Computer Science</td><td>Masters</td><td><span class="ui-mockup-badge active">Active</span></td></tr>
+                            </tbody>
+                        </table>
+                        <div style="margin-top: 15px; text-align: center; color: #666;">Showing 1 to 10 of 98 records | Page 1 of 10</div>
+                    </div>
+                </div>
+                
+                <h4>Description:</h4>
+                <p>
+                    Comprehensive teacher management system for handling all teacher-related operations including 
+                    profiles, qualifications, department assignments, class assignments, and salary information.
+                </p>
+                
+                <h4>Key Features:</h4>
+                <div class="feature-list">
+                    <ul>
+                        <li>Add, edit, and manage teacher profiles</li>
+                        <li>Teacher profile with photo upload</li>
+                        <li>Department assignment</li>
+                        <li>Class teacher assignment</li>
+                        <li>Subject specialization</li>
+                        <li>Qualification and experience tracking</li>
+                        <li>Employee ID and Teacher ID generation</li>
+                        <li>Salary information management</li>
+                        <li>Contact details and address</li>
+                        <li>Date of birth and personal information</li>
+                        <li>Teacher status (Active/Inactive)</li>
+                        <li>Search and filter teachers</li>
+                        <li>Course assignment to teachers</li>
+                    </ul>
+                </div>
+                
+                <h4>Teacher Information Includes:</h4>
+                <ul>
+                    <li>Personal and contact information</li>
+                    <li>Department and specialization</li>
+                    <li>Qualifications and certifications</li>
+                    <li>Years of experience</li>
+                    <li>Class and course assignments</li>
+                    <li>Salary and payroll information</li>
+                    <li>Employee ID and profile picture</li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="page-break"></div>
+
+        <!-- Component 5: Class Management -->
+        <section>
+            <div class="component-card" id="class-management">
+                <h3>5. Class Management</h3>
+                <div class="ui-mockup">
+                    <div class="ui-mockup-header">
+                        <div class="ui-mockup-title">Classes</div>
+                        <div class="ui-mockup-icons">
+                            <div class="ui-mockup-icon ui-mockup-bell">🔔</div>
+                            <div class="ui-mockup-icon ui-mockup-user">U</div>
+                        </div>
+                    </div>
+                    <div class="ui-mockup-banner" style="margin: 20px;">
+                        <h2>🏫 Class Management</h2>
+                        <p>Manage all classes, sections and academic year assignments</p>
+                        <div class="ui-mockup-buttons">
+                            <button class="ui-mockup-btn">Export CSV</button>
+                            <button class="ui-mockup-btn">Export PDF</button>
+                            <button class="ui-mockup-btn">Add Record</button>
+                            <button class="ui-mockup-btn">Refresh</button>
+                        </div>
+                    </div>
+                    <div class="ui-mockup-filters" style="margin: 20px;">
+                        <select class="ui-mockup-select"><option>All Academic Year</option></select>
+                        <select class="ui-mockup-select"><option>All Section</option></select>
+                        <select class="ui-mockup-select"><option>All Status</option></select>
+                        <button class="ui-mockup-btn-primary">Apply Filters</button>
+                        <button class="ui-mockup-btn-secondary">Clear Filters</button>
+                    </div>
+                    <div class="ui-mockup-cards" style="margin: 20px;">
+                        <div class="ui-mockup-card purple"><h3>10</h3><p>Total Classes</p></div>
+                        <div class="ui-mockup-card green"><h3>10</h3><p>Active Classes</p></div>
+                        <div class="ui-mockup-card blue"><h3>2</h3><p>Total Students</p></div>
+                        <div class="ui-mockup-card orange"><h3>1%</h3><p>Average Capacity</p></div>
+                    </div>
+                    <div style="padding: 20px; margin: 20px; background: white; border-radius: 5px;">
+                        <h4 style="margin-bottom: 15px;">Class Management Records (89 records)</h4>
+                        <table class="ui-mockup-table">
+                            <thead>
+                                <tr><th>Class Name</th><th>Section</th><th>Academic Year</th><th>Capacity</th><th>Current Strength</th><th>Class Teacher</th><th>Status</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1st</td><td>A</td><td>2024-25</td><td>40</td><td>2</td><td>Alice Brown</td><td><span class="ui-mockup-badge active">Active</span></td></tr>
+                                <tr><td>10th</td><td>A</td><td>2025-2026</td><td>40</td><td>N/A</td><td>Not Assigned</td><td><span class="ui-mockup-badge active">Active</span></td></tr>
+                                <tr><td>10th</td><td>B</td><td>2025-2026</td><td>40</td><td>N/A</td><td>Not Assigned</td><td><span class="ui-mockup-badge active">Active</span></td></tr>
+                            </tbody>
+                        </table>
+                        <div style="margin-top: 15px; text-align: center; color: #666;">Showing 1 to 10 of 89 records | Page 1 of 9</div>
+                    </div>
+                </div>
+                
+                <h4>Description:</h4>
+                <p>
+                    Efficient class creation and management system. Administrators can create classes with sections, 
+                    set capacity limits, assign class teachers, and manage academic year information.
+                </p>
+                
+                <h4>Key Features:</h4>
+                <div class="feature-list">
+                    <ul>
+                        <li>Create and manage classes</li>
+                        <li>Multiple sections per class (A, B, C, D)</li>
+                        <li>Class capacity management</li>
+                        <li>Class teacher assignment</li>
+                        <li>Academic year tracking</li>
+                        <li>Student count per class</li>
+                        <li>Class statistics and overview</li>
+                        <li>Edit and update class information</li>
+                        <li>Delete classes (with validation)</li>
+                        <li>Class-wise student listing</li>
+                        <li>Class-wise course assignment</li>
+                    </ul>
+                </div>
+                
+                <h4>Class Information Includes:</h4>
+                <ul>
+                    <li>Class name (1st, 2nd, 3rd, etc.)</li>
+                    <li>Section (A, B, C, D)</li>
+                    <li>Academic year</li>
+                    <li>Maximum capacity</li>
+                    <li>Current student count</li>
+                    <li>Assigned class teacher</li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="page-break"></div>
+
+        <!-- Component 6: Course Management -->
+        <section>
+            <div class="component-card" id="course-management">
+                <h3>6. Course Management</h3>
+                <div class="ui-mockup">
+                    <div class="ui-mockup-header">
+                        <div class="ui-mockup-title">Courses</div>
+                        <div class="ui-mockup-icons">
+                            <div class="ui-mockup-icon ui-mockup-bell">🔔</div>
+                            <div class="ui-mockup-icon ui-mockup-user">U</div>
+                        </div>
+                    </div>
+                    <div class="ui-mockup-banner" style="margin: 20px;">
+                        <h2>📚 Course Management</h2>
+                        <p>Manage all courses, subjects and academic curriculum</p>
+                        <div class="ui-mockup-buttons">
+                            <button class="ui-mockup-btn">Export CSV</button>
+                            <button class="ui-mockup-btn">Export PDF</button>
+                            <button class="ui-mockup-btn">Add Record</button>
+                            <button class="ui-mockup-btn">Refresh</button>
+                        </div>
+                    </div>
+                    <div class="ui-mockup-filters" style="margin: 20px;">
+                        <select class="ui-mockup-select"><option>All Class</option></select>
+                        <select class="ui-mockup-select"><option>All Teacher</option></select>
+                        <select class="ui-mockup-select"><option>All Status</option></select>
+                        <button class="ui-mockup-btn-primary">Apply Filters</button>
+                        <button class="ui-mockup-btn-secondary">Clear Filters</button>
+                    </div>
+                    <div class="ui-mockup-cards" style="margin: 20px;">
+                        <div class="ui-mockup-card purple"><h3>10</h3><p>Total Courses</p></div>
+                        <div class="ui-mockup-card green"><h3>10</h3><p>Active Courses</p></div>
+                        <div class="ui-mockup-card blue"><h3>30</h3><p>Total Credits</p></div>
+                        <div class="ui-mockup-card orange"><h3>10</h3><p>Teachers Assigned</p></div>
+                    </div>
+                    <div style="padding: 20px; margin: 20px; background: white; border-radius: 5px;">
+                        <h4 style="margin-bottom: 15px;">Course Management Records (15 records)</h4>
+                        <table class="ui-mockup-table">
+                            <thead>
+                                <tr><th>Course Name</th><th>Course Code</th><th>Class</th><th>Teacher</th><th>Credits</th><th>Status</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Science</td><td>SCI5th</td><td>5th - A</td><td>Mike Brown</td><td>3</td><td><span class="ui-mockup-badge active">Active</span></td></tr>
+                                <tr><td>English</td><td>ENG4th</td><td>4th - A</td><td>Sarah Johnson</td><td>3</td><td><span class="ui-mockup-badge active">Active</span></td></tr>
+                                <tr><td>Mathematics</td><td>MATH3rd</td><td>3rd - A</td><td>John Smith</td><td>3</td><td><span class="ui-mockup-badge active">Active</span></td></tr>
+                            </tbody>
+                        </table>
+                        <div style="margin-top: 15px; text-align: center; color: #666;">Showing 1 to 10 of 15 records | Page 1 of 2</div>
+                    </div>
+                </div>
+                
+                <h4>Description:</h4>
+                <p>
+                    Course creation and assignment system. Administrators can create courses, assign them to classes, 
+                    assign teachers, set credits, and manage course descriptions.
+                </p>
+                
+                <h4>Key Features:</h4>
+                <div class="feature-list">
+                    <ul>
+                        <li>Create and manage courses</li>
+                        <li>Course code generation</li>
+                        <li>Class-wise course assignment</li>
+                        <li>Teacher assignment to courses</li>
+                        <li>Credit hours management</li>
+                        <li>Course description and details</li>
+                        <li>Academic year tracking</li>
+                        <li>Course status (Active/Inactive)</li>
+                        <li>Edit and update courses</li>
+                        <li>Delete courses</li>
+                        <li>Course-wise student listing</li>
+                        <li>Course statistics</li>
+                    </ul>
+                </div>
+                
+                <h4>Course Information Includes:</h4>
+                <ul>
+                    <li>Course name (Mathematics, English, Science, etc.)</li>
+                    <li>Course code</li>
+                    <li>Assigned class</li>
+                    <li>Assigned teacher</li>
+                    <li>Credit hours</li>
+                    <li>Course description</li>
+                    <li>Academic year</li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="page-break"></div>
+
+        <!-- Component 7: Attendance Management -->
+        <section>
+            <div class="component-card" id="attendance-management">
+                <h3>7. Attendance Management</h3>
+                <div class="ui-mockup">
+                    <div class="ui-mockup-header">
+                        <div class="ui-mockup-title">Attendance</div>
+                        <div class="ui-mockup-icons">
+                            <div class="ui-mockup-icon ui-mockup-bell">🔔</div>
+                            <div class="ui-mockup-icon ui-mockup-user">U</div>
+                        </div>
+                    </div>
+                    <div class="ui-mockup-banner" style="margin: 20px;">
+                        <h2>📅 Attendance Management</h2>
+                        <p>Manage student attendance records and track daily presence</p>
+                        <div class="ui-mockup-buttons">
+                            <button class="ui-mockup-btn">Export CSV</button>
+                            <button class="ui-mockup-btn">Export PDF</button>
+                            <button class="ui-mockup-btn">Add Record</button>
+                            <button class="ui-mockup-btn">Refresh</button>
+                        </div>
+                    </div>
+                    <div class="ui-mockup-filters" style="margin: 20px;">
+                        <select class="ui-mockup-select"><option>All Course</option></select>
+                        <select class="ui-mockup-select"><option>All Class</option></select>
+                        <select class="ui-mockup-select"><option>All Status</option></select>
+                        <input type="date" class="ui-mockup-select" placeholder="Start Date">
+                        <button class="ui-mockup-btn-primary">Apply Filters</button>
+                        <button class="ui-mockup-btn-secondary">Clear Filters</button>
+                    </div>
+                    <div class="ui-mockup-cards" style="margin: 20px;">
+                        <div class="ui-mockup-card green"><h3>6</h3><p>Total Present</p></div>
+                        <div class="ui-mockup-card red"><h3>2</h3><p>Total Absent</p></div>
+                        <div class="ui-mockup-card orange"><h3>2</h3><p>Total Late</p></div>
+                        <div class="ui-mockup-card blue"><h3>60%</h3><p>Attendance Rate</p></div>
+                    </div>
+                    <div style="padding: 20px; margin: 20px; background: white; border-radius: 5px;">
+                        <h4 style="margin-bottom: 15px;">Attendance Management Records (126 records)</h4>
+                        <table class="ui-mockup-table">
+                            <thead>
+                                <tr><th>Student Name</th><th>Student ID</th><th>Course</th><th>Date</th><th>Status</th><th>Marked By</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>shahbaz saleem</td><td>STU025</td><td>English</td><td>25 Sept 2025</td><td><span class="ui-mockup-badge active">present</span></td><td>John Smith</td></tr>
+                                <tr><td>Wendy Chen</td><td>STU023</td><td>Mathematics</td><td>24 Sept 2025</td><td><span class="ui-mockup-badge pending">late</span></td><td>Sarah Johnson</td></tr>
+                                <tr><td>Uma Sharma</td><td>STU021</td><td>Science</td><td>24 Sept 2025</td><td><span class="ui-mockup-badge inactive">absent</span></td><td>Mike Brown</td></tr>
+                            </tbody>
+                        </table>
+                        <div style="margin-top: 15px; text-align: center; color: #666;">Showing 1 to 10 of 126 records | Page 1 of 13</div>
+                    </div>
+                </div>
+                
+                <h4>Description:</h4>
+                <p>
+                    Digital attendance tracking system for daily student attendance. Teachers can mark attendance for 
+                    their classes, view attendance history, and generate attendance reports.
+                </p>
+                
+                <h4>Key Features:</h4>
+                <div class="feature-list">
+                    <ul>
+                        <li>Daily attendance marking</li>
+                        <li>Bulk attendance entry</li>
+                        <li>Attendance status (Present, Absent, Late)</li>
+                        <li>Course-wise attendance</li>
+                        <li>Class-wise attendance</li>
+                        <li>Date-wise attendance tracking</li>
+                        <li>Attendance remarks</li>
+                        <li>Attendance history and reports</li>
+                        <li>Student-wise attendance percentage</li>
+                        <li>Attendance statistics and charts</li>
+                        <li>Export attendance data</li>
+                        <li>Attendance notifications for parents</li>
+                    </ul>
+                </div>
+                
+                <h4>Attendance Features:</h4>
+                <ul>
+                    <li><strong>Mark Attendance:</strong> Teachers can mark attendance for their classes</li>
+                    <li><strong>View History:</strong> View past attendance records</li>
+                    <li><strong>Reports:</strong> Generate attendance reports by student, class, or date</li>
+                    <li><strong>Statistics:</strong> View attendance percentages and trends</li>
+                    <li><strong>Notifications:</strong> Automatic notifications for low attendance</li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="page-break"></div>
+
+        <!-- Component 8: Exam Management -->
+        <section>
+            <div class="component-card" id="exam-management">
+                <h3>8. Exam Management</h3>
+                <div class="ui-mockup">
+                    <div class="ui-mockup-header">
+                        <div class="ui-mockup-title">Exams</div>
+                        <div class="ui-mockup-icons">
+                            <div class="ui-mockup-icon ui-mockup-bell">🔔</div>
+                            <div class="ui-mockup-icon ui-mockup-user">U</div>
+                        </div>
+                    </div>
+                    <div class="ui-mockup-banner" style="margin: 20px;">
+                        <h2>📝 Exam Management</h2>
+                        <p>Manage exams, schedules and academic assessments</p>
+                        <div class="ui-mockup-buttons">
+                            <button class="ui-mockup-btn">Export CSV</button>
+                            <button class="ui-mockup-btn">Export PDF</button>
+                            <button class="ui-mockup-btn">Add Record</button>
+                            <button class="ui-mockup-btn">Refresh</button>
+                        </div>
+                    </div>
+                    <div class="ui-mockup-filters" style="margin: 20px;">
+                        <select class="ui-mockup-select"><option>All Course</option></select>
+                        <select class="ui-mockup-select"><option>All Class</option></select>
+                        <select class="ui-mockup-select"><option>All Exam Type</option></select>
+                        <button class="ui-mockup-btn-primary">Apply Filters</button>
+                        <button class="ui-mockup-btn-secondary">Clear Filters</button>
+                    </div>
+                    <div class="ui-mockup-cards" style="margin: 20px;">
+                        <div class="ui-mockup-card purple"><h3>10</h3><p>Total Exams</p></div>
+                        <div class="ui-mockup-card orange"><h3>0</h3><p>Upcoming Exams</p></div>
+                        <div class="ui-mockup-card green"><h3>10</h3><p>Completed Exams</p></div>
+                        <div class="ui-mockup-card blue"><h3>0</h3><p>Active Exams</p></div>
+                    </div>
+                    <div style="padding: 20px; margin: 20px; background: white; border-radius: 5px;">
+                        <h4 style="margin-bottom: 15px;">Exam Management Records (30 records)</h4>
+                        <table class="ui-mockup-table">
+                            <thead>
+                                <tr><th>Exam Name</th><th>Exam Type</th><th>Course</th><th>Class</th><th>Exam Date</th><th>Time</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>English final</td><td>final</td><td>English (ENG1st)</td><td>1st - A</td><td>13 Nov 2025</td><td>09:00 - 12:00</td></tr>
+                                <tr><td>English midterm</td><td>midterm</td><td>English (ENG1st)</td><td>1st - A</td><td>11 Nov 2025</td><td>09:00 - 12:00</td></tr>
+                                <tr><td>Mathematics final</td><td>final</td><td>Mathematics (MATH4th)</td><td>4th - A</td><td>10 Nov 2025</td><td>09:00 - 12:00</td></tr>
+                            </tbody>
+                        </table>
+                        <div style="margin-top: 15px; text-align: center; color: #666;">Showing 1 to 10 of 30 records | Page 1 of 3</div>
+                    </div>
+                </div>
+                
+                <h4>Description:</h4>
+                <p>
+                    Complete exam scheduling and management system. Administrators and teachers can create exams, set 
+                    schedules, define exam parameters, and manage exam-related information.
+                </p>
+                
+                <h4>Key Features:</h4>
+                <div class="feature-list">
+                    <ul>
+                        <li>Create and schedule exams</li>
+                        <li>Exam types (Midterm, Final, Quiz, etc.)</li>
+                        <li>Course-wise exam assignment</li>
+                        <li>Class-wise exam scheduling</li>
+                        <li>Exam date and time management</li>
+                        <li>Duration and timing settings</li>
+                        <li>Total marks and passing marks</li>
+                        <li>Exam venue assignment</li>
+                        <li>Exam instructions</li>
+                        <li>Exam status (Active/Inactive)</li>
+                        <li>Edit and update exams</li>
+                        <li>Delete exams</li>
+                        <li>Exam calendar view</li>
+                        <li>Exam notifications</li>
+                    </ul>
+                </div>
+                
+                <h4>Exam Information Includes:</h4>
+                <ul>
+                    <li>Exam name and type</li>
+                    <li>Associated course and class</li>
+                    <li>Exam date and time</li>
+                    <li>Duration in minutes</li>
+                    <li>Total marks and passing marks</li>
+                    <li>Venue/location</li>
+                    <li>Instructions for students</li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="page-break"></div>
+
+        <!-- Component 9: Fee Management -->
+        <section>
+            <div class="component-card" id="fee-management">
+                <h3>9. Fee Management</h3>
+                <div class="ui-mockup">
+                    <div class="ui-mockup-header">
+                        <div class="ui-mockup-title">Fees</div>
+                        <div class="ui-mockup-icons">
+                            <div class="ui-mockup-icon ui-mockup-bell">🔔</div>
+                            <div class="ui-mockup-icon ui-mockup-user">U</div>
+                        </div>
+                    </div>
+                    <div class="ui-mockup-banner" style="margin: 20px;">
+                        <h2>💰 Fee Management</h2>
+                        <p>Manage student fees, payments and financial records</p>
+                        <div class="ui-mockup-buttons">
+                            <button class="ui-mockup-btn">Export CSV</button>
+                            <button class="ui-mockup-btn">Export PDF</button>
+                            <button class="ui-mockup-btn">Add Record</button>
+                            <button class="ui-mockup-btn">Refresh</button>
+                        </div>
+                    </div>
+                    <div class="ui-mockup-filters" style="margin: 20px;">
+                        <select class="ui-mockup-select"><option>All Student</option></select>
+                        <select class="ui-mockup-select"><option>All Status</option></select>
+                        <select class="ui-mockup-select"><option>All Fee Type</option></select>
+                        <button class="ui-mockup-btn-primary">Apply Filters</button>
+                        <button class="ui-mockup-btn-secondary">Clear Filters</button>
+                    </div>
+                    <div class="ui-mockup-cards" style="margin: 20px;">
+                        <div class="ui-mockup-card purple"><h3>10</h3><p>Total Fees</p></div>
+                        <div class="ui-mockup-card green"><h3>0</h3><p>Paid Fees</p></div>
+                        <div class="ui-mockup-card orange"><h3>0</h3><p>Pending Fees</p></div>
+                        <div class="ui-mockup-card blue"><h3>Rs 26,500</h3><p>Total Amount</p></div>
+                    </div>
+                    <div style="padding: 20px; margin: 20px; background: white; border-radius: 5px;">
+                        <h4 style="margin-bottom: 15px;">Fee Management Records (99 records)</h4>
+                        <table class="ui-mockup-table">
+                            <thead>
+                                <tr><th>Student Name</th><th>Student ID</th><th>Fee Type</th><th>Amount</th><th>Due Date</th><th>Status</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Ahmad Khan</td><td>STU20250035</td><td>exam</td><td>Rs 1,000.00</td><td>26 Sept 2025</td><td><span class="ui-mockup-badge inactive">overdue</span></td></tr>
+                                <tr><td>Eve Wilson</td><td>STU005</td><td>transport</td><td>Rs 2,000.00</td><td>2 Oct 2025</td><td><span class="ui-mockup-badge inactive">overdue</span></td></tr>
+                                <tr><td>Charlie Brown</td><td>STU003</td><td>library</td><td>Rs 500.00</td><td>1 Oct 2025</td><td><span class="ui-mockup-badge inactive">overdue</span></td></tr>
+                            </tbody>
+                        </table>
+                        <div style="margin-top: 15px; text-align: center; color: #666;">Showing 1 to 10 of 99 records | Page 1 of 10</div>
+                    </div>
+                </div>
+                
+                <h4>Description:</h4>
+                <p>
+                    Comprehensive fee collection and management system. Track all types of fees (tuition, transport, 
+                    library, etc.), payment status, due dates, and generate fee reports.
+                </p>
+                
+                <h4>Key Features:</h4>
+                <div class="feature-list">
+                    <ul>
+                        <li>Create and manage fee records</li>
+                        <li>Multiple fee types (Tuition, Transport, Library, Sports, Exam, etc.)</li>
+                        <li>Student-wise fee assignment</li>
+                        <li>Fee amount and due date management</li>
+                        <li>Payment status tracking (Paid, Pending, Overdue)</li>
+                        <li>Payment date recording</li>
+                        <li>Payment method tracking (Cash, Cheque, Online)</li>
+                        <li>Receipt number generation</li>
+                        <li>Fee reminders and notifications</li>
+                        <li>Overdue fee tracking</li>
+                        <li>Fee reports and analytics</li>
+                        <li>Fee collection statistics</li>
+                        <li>Export fee data</li>
+                        <li>Academic year-wise fee tracking</li>
+                    </ul>
+                </div>
+                
+                <h4>Fee Types Supported:</h4>
+                <ul>
+                    <li><strong>Tuition Fee:</strong> Regular monthly/quarterly fees</li>
+                    <li><strong>Transport Fee:</strong> School bus/transport charges</li>
+                    <li><strong>Library Fee:</strong> Library membership and usage fees</li>
+                    <li><strong>Sports Fee:</strong> Sports activities and equipment fees</li>
+                    <li><strong>Exam Fee:</strong> Examination and assessment fees</li>
+                    <li><strong>Other Fees:</strong> Miscellaneous charges</li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="page-break"></div>
+
+        <!-- Component 9.1: Online Fee Payment via Easypaisa -->
+        <section>
+            <div class="component-card" id="easypaisa-payment">
+                <h3>9.1. Online Fee Payment via Easypaisa</h3>
+                <div class="ui-mockup">
+                    <div class="ui-mockup-header">
+                        <div class="ui-mockup-title">Online Fee Payment</div>
+                        <div class="ui-mockup-icons">
+                            <div class="ui-mockup-icon ui-mockup-bell">🔔</div>
+                            <div class="ui-mockup-icon ui-mockup-user">U</div>
+                        </div>
+                    </div>
+                    <div class="ui-mockup-banner" style="margin: 20px;">
+                        <h2>💳 Online Fee Payment via Easypaisa</h2>
+                        <p>Secure and convenient online fee payment integration</p>
+                    </div>
+                    <div style="padding: 30px; margin: 20px; background: white; border-radius: 10px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                        <div style="text-align: center; margin-bottom: 30px;">
+                            <div style="font-size: 3em; margin-bottom: 15px;">💳</div>
+                            <h3 style="color: #667eea; margin-bottom: 10px;">Easypaisa Payment Gateway</h3>
+                            <p style="color: #666;">Secure payment processing</p>
+                        </div>
+                        <div style="background: #f9f9f9; padding: 25px; border-radius: 8px; margin-bottom: 20px;">
+                            <div style="margin-bottom: 15px;">
+                                <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #333;">Student Name</label>
+                                <input type="text" value="Ahmad Khan" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;" readonly>
+                            </div>
+                            <div style="margin-bottom: 15px;">
+                                <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #333;">Fee Type</label>
+                                <input type="text" value="Tuition Fee" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;" readonly>
+                            </div>
+                            <div style="margin-bottom: 15px;">
+                                <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #333;">Amount</label>
+                                <input type="text" value="Rs 5,000.00" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 1.2em; font-weight: bold; color: #667eea;" readonly>
+                            </div>
+                            <div style="margin-bottom: 20px;">
+                                <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #333;">Payment Method</label>
+                                <div style="display: flex; gap: 10px; margin-top: 10px;">
+                                    <div style="flex: 1; padding: 15px; border: 2px solid #667eea; border-radius: 8px; text-align: center; background: #f8f9ff;">
+                                        <div style="font-size: 2em; margin-bottom: 5px;">📱</div>
+                                        <div style="font-weight: 600; color: #667eea;">Easypaisa</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="ui-mockup-btn-primary" style="width: 100%; padding: 15px; font-size: 1.1em; margin-top: 10px;">
+                                Proceed to Payment
+                            </button>
+                        </div>
+                        <div style="background: #e8f5e9; padding: 15px; border-radius: 5px; border-left: 4px solid #28a745;">
+                            <div style="font-weight: 600; color: #28a745; margin-bottom: 5px;">✓ Secure Payment</div>
+                            <div style="font-size: 0.9em; color: #666;">Your payment is processed securely through Easypaisa payment gateway</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h4>Description:</h4>
+                <p>
+                    Integrated online fee payment system through Easypaisa payment gateway. Students and parents can 
+                    securely pay school fees online using their Easypaisa account, mobile wallet, or bank account. 
+                    The system provides real-time payment processing, instant fee status updates, and automatic receipt generation.
+                </p>
+                
+                <h4>Key Features:</h4>
+                <div class="feature-list">
+                    <ul>
+                        <li>Easypaisa payment gateway integration</li>
+                        <li>Multiple payment methods (Easypaisa wallet, bank account, debit/credit card)</li>
+                        <li>Secure payment processing with SSL encryption</li>
+                        <li>Real-time payment status updates</li>
+                        <li>Automatic fee status update after successful payment</li>
+                        <li>Instant receipt generation and email delivery</li>
+                        <li>Payment history tracking</li>
+                        <li>Transaction ID and reference number generation</li>
+                        <li>Payment confirmation notifications</li>
+                        <li>Failed payment handling and retry options</li>
+                        <li>Refund processing support</li>
+                        <li>Payment gateway dashboard integration</li>
+                        <li>24/7 payment availability</li>
+                        <li>Mobile-friendly payment interface</li>
+                    </ul>
+                </div>
+                
+                <h4>Payment Methods Supported:</h4>
+                <ul>
+                    <li><strong>Easypaisa Mobile Account:</strong> Direct payment from Easypaisa wallet</li>
+                    <li><strong>Bank Account:</strong> Direct bank transfer through Easypaisa</li>
+                    <li><strong>Debit/Credit Card:</strong> Card payments through secure gateway</li>
+                    <li><strong>JazzCash:</strong> Alternative mobile wallet option</li>
+                </ul>
+                
+                <h4>Payment Flow:</h4>
+                <ol>
+                    <li>Student/Parent selects fee to pay from fee management section</li>
+                    <li>System displays fee details and amount</li>
+                    <li>User clicks "Pay Online" button</li>
+                    <li>Redirected to secure Easypaisa payment page</li>
+                    <li>User selects payment method and completes payment</li>
+                    <li>Payment confirmation received</li>
+                    <li>System automatically updates fee status to "Paid"</li>
+                    <li>Receipt generated and sent via email</li>
+                    <li>Payment reflected in fee records and financial dashboard</li>
+                </ol>
+                
+                <h4>Security Features:</h4>
+                <div class="feature-list">
+                    <ul>
+                        <li>SSL/TLS encryption for all transactions</li>
+                        <li>PCI DSS compliant payment processing</li>
+                        <li>Secure token-based authentication</li>
+                        <li>Transaction logging and audit trail</li>
+                        <li>Fraud detection and prevention</li>
+                        <li>Secure payment gateway integration</li>
+                    </ul>
+                </div>
+                
+                <div class="highlight-box">
+                    <h4>Benefits:</h4>
+                    <ul>
+                        <li>✅ <strong>Convenience:</strong> Pay fees anytime, anywhere</li>
+                        <li>✅ <strong>Speed:</strong> Instant payment processing</li>
+                        <li>✅ <strong>Security:</strong> Bank-level security standards</li>
+                        <li>✅ <strong>Transparency:</strong> Real-time payment tracking</li>
+                        <li>✅ <strong>Efficiency:</strong> Reduced manual fee collection workload</li>
+                        <li>✅ <strong>Accessibility:</strong> Multiple payment options for all users</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <div class="page-break"></div>
+
+        <!-- Component 10: Financial Dashboard -->
+        <section>
+            <div class="component-card" id="financial-dashboard">
+                <h3>10. Financial Dashboard</h3>
+                <div class="ui-mockup">
+                    <div class="ui-mockup-header">
+                        <div class="ui-mockup-title">Financial Dashboard</div>
+                        <div class="ui-mockup-icons">
+                            <div class="ui-mockup-icon ui-mockup-bell">🔔</div>
+                            <div class="ui-mockup-icon ui-mockup-user">U</div>
+                        </div>
+                    </div>
+                    <div style="padding: 20px; background: white; margin: 20px; border-radius: 5px;">
+                        <h3 style="margin-bottom: 20px;">Financial Analytics Dashboard</h3>
+                        <div class="ui-mockup-cards" style="margin: 20px 0;">
+                            <div class="ui-mockup-card green"><h3>Rs 2,000</h3><p>Total Income</p></div>
+                            <div class="ui-mockup-card red"><h3>Rs 5,000</h3><p>Total Expenses</p></div>
+                            <div class="ui-mockup-card blue"><h3>-Rs 3,000</h3><p>Net Balance</p></div>
+                            <div class="ui-mockup-card orange"><h3>1</h3><p>Pending Records</p></div>
+                        </div>
+                        <div style="background: #f9f9f9; padding: 20px; border-radius: 5px; margin-top: 20px;">
+                            <h4 style="margin-bottom: 15px;">Monthly Trends</h4>
+                            <div style="text-align: center; padding: 40px; color: #666;">
+                                📊 Income vs Expense Chart<br>
+                                <small>Visual representation of financial trends</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h4>Description:</h4>
+                <p>
+                    Advanced financial analytics dashboard providing comprehensive insights into school finances including 
+                    income, expenses, profit/loss, and financial trends with interactive charts and graphs.
+                </p>
+                
+                <h4>Key Features:</h4>
+                <div class="feature-list">
+                    <ul>
+                        <li>Real-time financial summary</li>
+                        <li>Income vs Expense comparison</li>
+                        <li>Monthly/Yearly financial trends</li>
+                        <li>Category-wise financial breakdown</li>
+                        <li>Profit and loss analysis</li>
+                        <li>Interactive charts and graphs</li>
+                        <li>Period-wise filtering (Daily, Weekly, Monthly, Yearly)</li>
+                        <li>Recent transactions list</li>
+                        <li>Financial forecasting</li>
+                        <li>Export financial reports</li>
+                        <li>Custom date range selection</li>
+                        <li>Financial health indicators</li>
+                    </ul>
+                </div>
+                
+                <h4>Dashboard Sections:</h4>
+                <ul>
+                    <li><strong>Summary Cards:</strong> Total income, expenses, profit/loss</li>
+                    <li><strong>Income vs Expense Chart:</strong> Visual comparison</li>
+                    <li><strong>Trend Analysis:</strong> Monthly/yearly trends</li>
+                    <li><strong>Category Breakdown:</strong> Income and expense by category</li>
+                    <li><strong>Recent Transactions:</strong> Latest financial activities</li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="page-break"></div>
+
+        <!-- Component 11: Financial Management -->
+        <section>
+            <div class="component-card" id="financial-management">
+                <h3>11. Financial Management</h3>
+                <div class="ui-mockup">
+                    <div class="ui-mockup-header">
+                        <div class="ui-mockup-title">Financial Management</div>
+                        <div class="ui-mockup-icons">
+                            <div class="ui-mockup-icon ui-mockup-bell">🔔</div>
+                            <div class="ui-mockup-icon ui-mockup-user">U</div>
+                        </div>
+                    </div>
+                    <div class="ui-mockup-banner" style="margin: 20px;">
+                        <h2>💰 Financial Management</h2>
+                        <p>Manage all financial records, income, and expenses</p>
+                        <div class="ui-mockup-buttons">
+                            <button class="ui-mockup-btn">Export CSV</button>
+                            <button class="ui-mockup-btn">Export PDF</button>
+                            <button class="ui-mockup-btn">Add Record</button>
+                            <button class="ui-mockup-btn">Refresh</button>
+                        </div>
+                    </div>
+                    <div class="ui-mockup-filters" style="margin: 20px;">
+                        <select class="ui-mockup-select"><option>All Types</option></select>
+                        <select class="ui-mockup-select"><option>All Categories</option></select>
+                        <select class="ui-mockup-select"><option>All Status</option></select>
+                        <input type="date" class="ui-mockup-select" placeholder="Start Date">
+                        <input type="date" class="ui-mockup-select" placeholder="End Date">
+                        <button class="ui-mockup-btn-primary">Apply Filters</button>
+                        <button class="ui-mockup-btn-secondary">Clear Filters</button>
+                    </div>
+                    <div class="ui-mockup-cards" style="margin: 20px;">
+                        <div class="ui-mockup-card green"><h3>Rs 2,000</h3><p>Total Income</p></div>
+                        <div class="ui-mockup-card red"><h3>Rs 5,000</h3><p>Total Expenses</p></div>
+                        <div class="ui-mockup-card blue"><h3>-Rs 3,000</h3><p>Net Balance</p></div>
+                        <div class="ui-mockup-card orange"><h3>1</h3><p>Pending Records</p></div>
+                    </div>
+                    <div style="padding: 20px; margin: 20px; background: white; border-radius: 5px;">
+                        <h4 style="margin-bottom: 15px;">Financial Records (2 records)</h4>
+                        <table class="ui-mockup-table">
+                            <thead>
+                                <tr><th>Date</th><th>Type</th><th>Category</th><th>Description</th><th>Amount</th><th>Status</th><th>Payment Method</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Sep 25, 2025</td><td>Income</td><td>Utilities</td><td>deccrip Ref: 001</td><td style="color: green;">Rs 2,000.00</td><td><span class="ui-mockup-badge active">Completed</span></td><td>Cash</td></tr>
+                                <tr><td>Sep 24, 2025</td><td>Expense</td><td>Utilities</td><td>Monthly electricity bill</td><td style="color: red;">Rs 5,000.00</td><td><span class="ui-mockup-badge pending">Pending</span></td><td>Bank Transfer</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <h4>Description:</h4>
+                <p>
+                    Complete financial transaction management system. Record all income and expenses, categorize transactions, 
+                    and maintain detailed financial records for comprehensive accounting.
+                </p>
+                
+                <h4>Key Features:</h4>
+                <div class="feature-list">
+                    <ul>
+                        <li>Record income transactions</li>
+                        <li>Record expense transactions</li>
+                        <li>Transaction categorization</li>
+                        <li>Date and amount tracking</li>
+                        <li>Description and notes</li>
+                        <li>Payment method recording</li>
+                        <li>Transaction status</li>
+                        <li>Edit and update transactions</li>
+                        <li>Delete transactions</li>
+                        <li>Search and filter transactions</li>
+                        <li>Transaction history</li>
+                        <li>Export transaction data</li>
+                        <li>Receipt attachment</li>
+                    </ul>
+                </div>
+                
+                <h4>Transaction Types:</h4>
+                <ul>
+                    <li><strong>Income:</strong> Fee collections, donations, grants, etc.</li>
+                    <li><strong>Expenses:</strong> Salaries, utilities, maintenance, supplies, etc.</li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="page-break"></div>
+
+        <!-- Component 12: Payroll Management -->
+        <section>
+            <div class="component-card" id="payroll-management">
+                <h3>12. Payroll Management</h3>
+                <div class="ui-mockup">
+                    <div class="ui-mockup-header">
+                        <div class="ui-mockup-title">Payroll Management</div>
+                        <div class="ui-mockup-icons">
+                            <div class="ui-mockup-icon ui-mockup-bell">🔔</div>
+                            <div class="ui-mockup-icon ui-mockup-user">U</div>
+                        </div>
+                    </div>
+                    <div class="ui-mockup-banner" style="margin: 20px;">
+                        <h2>💼 Payroll Management</h2>
+                        <p>Manage employee salaries, benefits and payroll processing</p>
+                        <div class="ui-mockup-buttons">
+                            <button class="ui-mockup-btn">Export CSV</button>
+                            <button class="ui-mockup-btn">Export PDF</button>
+                            <button class="ui-mockup-btn">Add Record</button>
+                            <button class="ui-mockup-btn">Refresh</button>
+                        </div>
+                    </div>
+                    <div class="ui-mockup-filters" style="margin: 20px;">
+                        <select class="ui-mockup-select"><option>All Employee</option></select>
+                        <select class="ui-mockup-select"><option>All Status</option></select>
+                        <button class="ui-mockup-btn-primary">Apply Filters</button>
+                        <button class="ui-mockup-btn-secondary">Clear Filters</button>
+                    </div>
+                    <div class="ui-mockup-cards" style="margin: 20px;">
+                        <div class="ui-mockup-card purple"><h3>1</h3><p>Total Payrolls</p></div>
+                        <div class="ui-mockup-card green"><h3>0</h3><p>Processed</p></div>
+                        <div class="ui-mockup-card orange"><h3>0</h3><p>Pending</p></div>
+                        <div class="ui-mockup-card blue"><h3>Rs 61,000</h3><p>Total Amount</p></div>
+                    </div>
+                    <div style="padding: 20px; margin: 20px; background: white; border-radius: 5px;">
+                        <h4 style="margin-bottom: 15px;">Payroll Management Records (1 records)</h4>
+                        <table class="ui-mockup-table">
+                            <thead>
+                                <tr><th>Employee Email</th><th>Basic Salary</th><th>Gross Salary</th><th>Net Salary</th><th>Pay Period</th><th>Status</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>admin@school.com</td><td>Rs 50,000.00</td><td>Rs 68,000.00</td><td>Rs 61,000.00</td><td>September 2025</td><td><span class="ui-mockup-badge inactive">draft</span></td></tr>
+                            </tbody>
+                        </table>
+                        <div style="margin-top: 15px; text-align: center; color: #666;">Showing 1 to 1 of 1 records | Page 1 of 1</div>
+                    </div>
+                </div>
+                
+                <h4>Description:</h4>
+                <p>
+                    Employee payroll management system for handling teacher and staff salaries. Calculate salaries, 
+                    manage deductions, bonuses, and generate payroll reports.
+                </p>
+                
+                <h4>Key Features:</h4>
+                <div class="feature-list">
+                    <ul>
+                        <li>Employee-wise payroll management</li>
+                        <li>Salary calculation</li>
+                        <li>Deductions management</li>
+                        <li>Bonuses and allowances</li>
+                        <li>Net salary calculation</li>
+                        <li>Payroll period management</li>
+                        <li>Payment status tracking</li>
+                        <li>Payroll history</li>
+                        <li>Generate payroll reports</li>
+                        <li>Export payroll data</li>
+                        <li>Salary slip generation</li>
+                        <li>Tax calculations</li>
+                    </ul>
+                </div>
+                
+                <h4>Payroll Information Includes:</h4>
+                <ul>
+                    <li>Employee details</li>
+                    <li>Basic salary</li>
+                    <li>Allowances and bonuses</li>
+                    <li>Deductions (tax, insurance, etc.)</li>
+                    <li>Net salary</li>
+                    <li>Payment date and status</li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="page-break"></div>
+
+        <!-- Component 13: Leave Management -->
+        <section>
+            <div class="component-card" id="leave-management">
+                <h3>13. Leave Management</h3>
+                <div class="ui-mockup">
+                    <div class="ui-mockup-header">
+                        <div class="ui-mockup-title">Leave Management</div>
+                        <div class="ui-mockup-icons">
+                            <div class="ui-mockup-icon ui-mockup-bell">🔔</div>
+                            <div class="ui-mockup-icon ui-mockup-user">U</div>
+                        </div>
+                    </div>
+                    <div class="ui-mockup-banner" style="margin: 20px;">
+                        <h2>📅 Leave Management</h2>
+                        <p>Manage employee leave requests and approvals</p>
+                        <div class="ui-mockup-buttons">
+                            <button class="ui-mockup-btn">Export CSV</button>
+                            <button class="ui-mockup-btn">Export PDF</button>
+                            <button class="ui-mockup-btn">Add Record</button>
+                            <button class="ui-mockup-btn">Refresh</button>
+                        </div>
+                    </div>
+                    <div class="ui-mockup-filters" style="margin: 20px;">
+                        <select class="ui-mockup-select"><option>All Leave Type</option></select>
+                        <button class="ui-mockup-btn-primary">Apply Filters</button>
+                        <button class="ui-mockup-btn-secondary">Clear Filters</button>
+                    </div>
+                    <div class="ui-mockup-cards" style="margin: 20px;">
+                        <div class="ui-mockup-card purple"><h3>1</h3><p>Total Leaves</p></div>
+                        <div class="ui-mockup-card orange"><h3>1</h3><p>Pending Leaves</p></div>
+                        <div class="ui-mockup-card green"><h3>0</h3><p>Approved Leaves</p></div>
+                        <div class="ui-mockup-card red"><h3>0</h3><p>Rejected Leaves</p></div>
+                    </div>
+                    <div style="padding: 20px; margin: 20px; background: white; border-radius: 5px;">
+                        <h4 style="margin-bottom: 15px;">Leave Management Records (1 records)</h4>
+                        <table class="ui-mockup-table">
+                            <thead>
+                                <tr><th>Employee Email</th><th>Leave Type</th><th>Start Date</th><th>End Date</th><th>Duration</th><th>Reason</th><th>Status</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>admin@school.com</td><td>sick</td><td>25 Sept 2025</td><td>26 Sept 2025</td><td>2 days</td><td>Feeling unwell, need rest</td><td><span class="ui-mockup-badge pending">pending</span></td></tr>
+                            </tbody>
+                        </table>
+                        <div style="margin-top: 15px; text-align: center; color: #666;">Showing 1 to 1 of 1 records | Page 1 of 1</div>
+                    </div>
+                </div>
+                
+                <h4>Description:</h4>
+                <p>
+                    Employee leave request and approval system. Teachers and staff can apply for leaves, and administrators 
+                    can approve or reject leave requests with proper tracking and notifications.
+                </p>
+                
+                <h4>Key Features:</h4>
+                <div class="feature-list">
+                    <ul>
+                        <li>Leave request submission</li>
+                        <li>Leave type selection (Sick, Casual, Annual, etc.)</li>
+                        <li>Date range selection</li>
+                        <li>Leave reason and description</li>
+                        <li>Leave approval workflow</li>
+                        <li>Leave status tracking (Pending, Approved, Rejected)</li>
+                        <li>Leave balance tracking</li>
+                        <li>Leave history</li>
+                        <li>Leave calendar view</li>
+                        <li>Leave notifications</li>
+                        <li>Leave reports</li>
+                        <li>Bulk leave approval</li>
+                    </ul>
+                </div>
+                
+                <h4>Leave Types:</h4>
+                <ul>
+                    <li><strong>Sick Leave:</strong> Medical leave</li>
+                    <li><strong>Casual Leave:</strong> Personal leave</li>
+                    <li><strong>Annual Leave:</strong> Vacation leave</li>
+                    <li><strong>Emergency Leave:</strong> Urgent leave</li>
+                    <li><strong>Other:</strong> Miscellaneous leave types</li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="page-break"></div>
+
+        <!-- Component 14: Chat System -->
+        <section>
+            <div class="component-card" id="chat-system">
+                <h3>14. Real-Time Chat System</h3>
+                <div class="ui-mockup">
+                    <div class="ui-mockup-header">
+                        <div class="ui-mockup-title">Chat</div>
+                        <div class="ui-mockup-icons">
+                            <div class="ui-mockup-icon ui-mockup-bell">🔔</div>
+                            <div class="ui-mockup-icon ui-mockup-user">U</div>
+                        </div>
+                    </div>
+                    <div class="ui-mockup-chat" style="margin: 20px;">
+                        <div class="ui-mockup-chat-sidebar">
+                            <div style="padding: 10px; border-bottom: 1px solid #ddd; margin-bottom: 10px;">
+                                <input type="text" placeholder="Search chats..." style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+                            </div>
+                            <div style="padding: 15px; background: #e8f5e9; border-radius: 5px; margin-bottom: 10px;">
+                                <div style="font-weight: bold;">John Smith</div>
+                                <div style="font-size: 0.85em; color: #666;">Teacher</div>
+                                <div style="font-size: 0.8em; color: #999; margin-top: 5px;">You: kesy ho</div>
+                                <div style="font-size: 0.75em; color: #999;">Sep 29 12:41 PM</div>
+                            </div>
+                        </div>
+                        <div class="ui-mockup-chat-main">
+                            <div class="ui-mockup-chat-header">
+                                <div>John Smith (Teacher, 49d ago)</div>
+                                <div>⋮</div>
+                            </div>
+                            <div class="ui-mockup-chat-messages">
+                                <div class="ui-mockup-message received">
+                                    <div>hy</div>
+                                    <div style="font-size: 0.8em; color: #999; margin-top: 5px;">Sep 29 12:30 PM</div>
+                                </div>
+                                <div class="ui-mockup-message received">
+                                    <div>hy</div>
+                                    <div style="font-size: 0.8em; color: #999; margin-top: 5px;">Sep 29 12:30 PM</div>
+                                </div>
+                                <div class="ui-mockup-message sent">
+                                    <div>kesy ho</div>
+                                    <div style="font-size: 0.8em; opacity: 0.8; margin-top: 5px;">Sep 29 12:41 PM</div>
+                                </div>
+                                <div class="ui-mockup-message sent">
+                                    <div>kesy ho</div>
+                                    <div style="font-size: 0.8em; opacity: 0.8; margin-top: 5px;">Sep 29 12:41 PM</div>
+                                </div>
+                            </div>
+                            <div class="ui-mockup-chat-input">
+                                <input type="text" class="ui-mockup-input" placeholder="Type a message...">
+                                <button class="ui-mockup-btn-primary">📎</button>
+                                <button class="ui-mockup-btn-primary">✈</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h4>Description:</h4>
+                <p>
+                    Advanced real-time messaging system for communication between administrators, teachers, and students. 
+                    Supports direct messages, group chats, and file sharing with instant notifications.
+                </p>
+                
+                <h4>Key Features:</h4>
+                <div class="feature-list">
+                    <ul>
+                        <li>Real-time messaging with Socket.io</li>
+                        <li>Direct one-on-one chats</li>
+                        <li>Group chat functionality</li>
+                        <li>Support chat channels</li>
+                        <li>File sharing (images, documents, audio, video)</li>
+                        <li>Message status indicators (Sent, Delivered, Read)</li>
+                        <li>Online/Offline status</li>
+                        <li>Message search functionality</li>
+                        <li>Chat history and archives</li>
+                        <li>Push notifications</li>
+                        <li>Emoji support</li>
+                        <li>Message timestamps</li>
+                        <li>User presence indicators</li>
+                        <li>Chat room management</li>
+                    </ul>
+                </div>
+                
+                <h4>Chat Types:</h4>
+                <ul>
+                    <li><strong>Direct Chat:</strong> One-on-one private messaging</li>
+                    <li><strong>Group Chat:</strong> Multiple participants group conversations</li>
+                    <li><strong>Support Chat:</strong> Admin support channels</li>
+                </ul>
+                
+                <h4>File Support:</h4>
+                <ul>
+                    <li>Images (JPG, PNG, GIF)</li>
+                    <li>Documents (PDF, DOC, DOCX, TXT)</li>
+                    <li>Audio files</li>
+                    <li>Video files</li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="page-break"></div>
+
+        <!-- Component 15: Notification Management -->
+        <section>
+            <div class="component-card" id="notification-management">
+                <h3>15. Notification Management</h3>
+                <div class="ui-mockup">
+                    <div class="ui-mockup-header">
+                        <div class="ui-mockup-title">Notifications</div>
+                        <div class="ui-mockup-icons">
+                            <div class="ui-mockup-icon ui-mockup-bell">🔔</div>
+                            <div class="ui-mockup-icon ui-mockup-user">U</div>
+                        </div>
+                    </div>
+                    <div class="ui-mockup-banner" style="margin: 20px;">
+                        <h2>🔔 Notification Management</h2>
+                        <p>Manage system notifications and user alerts</p>
+                        <div class="ui-mockup-buttons">
+                            <button class="ui-mockup-btn">Export CSV</button>
+                            <button class="ui-mockup-btn">Export PDF</button>
+                            <button class="ui-mockup-btn">Add Record</button>
+                            <button class="ui-mockup-btn">Refresh</button>
+                        </div>
+                    </div>
+                    <div class="ui-mockup-filters" style="margin: 20px;">
+                        <input type="text" placeholder="Search" class="ui-mockup-select">
+                        <select class="ui-mockup-select"><option>All Type</option></select>
+                        <select class="ui-mockup-select"><option>All Target Audience</option></select>
+                        <select class="ui-mockup-select"><option>All Status</option></select>
+                        <button class="ui-mockup-btn-primary">Apply Filters</button>
+                        <button class="ui-mockup-btn-secondary">Clear Filters</button>
+                    </div>
+                    <div class="ui-mockup-cards" style="margin: 20px;">
+                        <div class="ui-mockup-card purple"><h3>10</h3><p>Total Notifications</p></div>
+                        <div class="ui-mockup-card orange"><h3>10</h3><p>Unread Notifications</p></div>
+                        <div class="ui-mockup-card green"><h3>0</h3><p>Read Notifications</p></div>
+                        <div class="ui-mockup-card blue"><h3>0</h3><p>Today's Notifications</p></div>
+                    </div>
+                    <div style="padding: 20px; margin: 20px; background: white; border-radius: 5px;">
+                        <h4 style="margin-bottom: 15px;">Notification Management Records (10 records)</h4>
+                        <table class="ui-mockup-table">
+                            <thead>
+                                <tr><th>Title</th><th>Message</th><th>Type</th><th>Target Audience</th><th>Status</th><th>Created At</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>chutti maro</td><td>chutti maro</td><td>announcement</td><td>all</td><td><span class="ui-mockup-badge inactive">Inactive</span></td><td>10 Oct 2025</td></tr>
+                                <tr><td>exam start</td><td>tommore exam</td><td>announcement</td><td>all</td><td><span class="ui-mockup-badge inactive">Inactive</span></td><td>1 Oct 2025</td></tr>
+                                <tr><td>Holiday</td><td>Tommorow school remain closed...</td><td>announcement</td><td>all</td><td><span class="ui-mockup-badge inactive">Inactive</span></td><td>1 Oct 2025</td></tr>
+                            </tbody>
+                        </table>
+                        <div style="margin-top: 15px; text-align: center; color: #666;">Showing 1 to 10 of 10 records | Page 1 of 1</div>
+                    </div>
+                </div>
+                
+                <h4>Description:</h4>
+                <p>
+                    Comprehensive notification system for sending alerts, updates, and important messages to users. 
+                    Supports targeted notifications based on user roles and preferences.
+                </p>
+                
+                <h4>Key Features:</h4>
+                <div class="feature-list">
+                    <ul>
+                        <li>Create and send notifications</li>
+                        <li>Multiple notification types (Info, Success, Warning, Error, etc.)</li>
+                        <li>Targeted notifications (All, Students, Teachers, Admins)</li>
+                        <li>Role-based notification delivery</li>
+                        <li>Read/Unread status tracking</li>
+                        <li>Notification priority levels</li>
+                        <li>Push notifications</li>
+                        <li>Email notifications</li>
+                        <li>In-app notification center</li>
+                        <li>Notification history</li>
+                        <li>Mark as read/unread</li>
+                        <li>Delete notifications</li>
+                        <li>Notification preferences</li>
+                    </ul>
+                </div>
+                
+                <h4>Notification Types:</h4>
+                <ul>
+                    <li><strong>Info:</strong> General information</li>
+                    <li><strong>Success:</strong> Success messages</li>
+                    <li><strong>Warning:</strong> Important warnings</li>
+                    <li><strong>Error:</strong> Error alerts</li>
+                    <li><strong>Fee:</strong> Fee-related notifications</li>
+                    <li><strong>Attendance:</strong> Attendance alerts</li>
+                    <li><strong>Exam:</strong> Exam-related notifications</li>
+                    <li><strong>Event:</strong> Event announcements</li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="page-break"></div>
+
+        <!-- Component 16: Announcement Management -->
+        <section>
+            <div class="component-card" id="announcement-management">
+                <h3>16. Announcement Management</h3>
+                <div class="ui-mockup">
+                    <div class="ui-mockup-header">
+                        <div class="ui-mockup-title">Announcements</div>
+                        <div class="ui-mockup-icons">
+                            <div class="ui-mockup-icon ui-mockup-bell">🔔</div>
+                            <div class="ui-mockup-icon ui-mockup-user">U</div>
+                        </div>
+                    </div>
+                    <div class="ui-mockup-banner" style="margin: 20px;">
+                        <h2>📢 Announcement Management</h2>
+                        <p>Manage school announcements and important notices</p>
+                        <div class="ui-mockup-buttons">
+                            <button class="ui-mockup-btn">Export CSV</button>
+                            <button class="ui-mockup-btn">Export PDF</button>
+                            <button class="ui-mockup-btn">Add Record</button>
+                            <button class="ui-mockup-btn">Refresh</button>
+                        </div>
+                    </div>
+                    <div class="ui-mockup-filters" style="margin: 20px;">
+                        <select class="ui-mockup-select"><option>All Priority</option></select>
+                        <select class="ui-mockup-select"><option>All Target Audience</option></select>
+                        <button class="ui-mockup-btn-primary">Apply Filters</button>
+                        <button class="ui-mockup-btn-secondary">Clear Filters</button>
+                    </div>
+                    <div class="ui-mockup-cards" style="margin: 20px;">
+                        <div class="ui-mockup-card purple"><h3>4</h3><p>Total Announcements</p></div>
+                        <div class="ui-mockup-card green"><h3>0</h3><p>Active Announcements</p></div>
+                        <div class="ui-mockup-card red"><h3>1</h3><p>High Priority</p></div>
+                        <div class="ui-mockup-card orange"><h3>0</h3><p>Expiring Soon</p></div>
+                    </div>
+                    <div style="padding: 20px; margin: 20px; background: white; border-radius: 5px;">
+                        <h4 style="margin-bottom: 15px;">Announcement Management Records (4 records)</h4>
+                        <table class="ui-mockup-table">
+                            <thead>
+                                <tr><th>Title</th><th>Content</th><th>Priority</th><th>Target Audience</th><th>Status</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Test Announcement</td><td>This is a test announcement</td><td><span class="ui-mockup-badge pending">medium</span></td><td>All</td><td>N/A</td></tr>
+                                <tr><td>Sports Day Announcement</td><td>Annual sports day will be hel...</td><td><span class="ui-mockup-badge pending">medium</span></td><td>students</td><td>N/A</td></tr>
+                                <tr><td>Welcome to New Academic Year</td><td>We welcome all students and...</td><td><span class="ui-mockup-badge inactive">high</span></td><td>all</td><td>N/A</td></tr>
+                            </tbody>
+                        </table>
+                        <div style="margin-top: 15px; text-align: center; color: #666;">Showing 1 to 4 of 4 records | Page 1 of 1</div>
+                    </div>
+                </div>
+                
+                <h4>Description:</h4>
+                <p>
+                    School-wide announcement system for posting important notices, events, and updates. Administrators 
+                    can create announcements with different priority levels and target specific audiences.
+                </p>
+                
+                <h4>Key Features:</h4>
+                <div class="feature-list">
+                    <ul>
+                        <li>Create and publish announcements</li>
+                        <li>Announcement title and content</li>
+                        <li>Priority levels (High, Medium, Low)</li>
+                        <li>Target audience selection (All, Students, Teachers, Parents)</li>
+                        <li>Active/Inactive status</li>
+                        <li>Announcement date and time</li>
+                        <li>Edit and update announcements</li>
+                        <li>Delete announcements</li>
+                        <li>Announcement visibility control</li>
+                        <li>Rich text content support</li>
+                        <li>Attachment support</li>
+                        <li>Announcement history</li>
+                    </ul>
+                </div>
+                
+                <h4>Priority Levels:</h4>
+                <ul>
+                    <li><strong>High:</strong> Urgent and important announcements</li>
+                    <li><strong>Medium:</strong> Regular announcements</li>
+                    <li><strong>Low:</strong> General information</li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="page-break"></div>
+
+        <!-- Component 17: Reports -->
+        <section>
+            <div class="component-card" id="reports">
+                <h3>17. Reports & Analytics</h3>
+                <div class="ui-mockup">
+                    <div class="ui-mockup-header">
+                        <div class="ui-mockup-title">Reports & Analytics</div>
+                        <div class="ui-mockup-icons">
+                            <div class="ui-mockup-icon ui-mockup-bell">🔔</div>
+                            <div class="ui-mockup-icon ui-mockup-user">U</div>
+                        </div>
+                    </div>
+                    <div style="padding: 20px; background: white; margin: 20px; border-radius: 5px;">
+                        <h3 style="margin-bottom: 20px;">Generate comprehensive reports and analytics for your school</h3>
+                        <div class="ui-mockup-filters" style="margin: 20px 0;">
+                            <select class="ui-mockup-select"><option>Attendance Report</option></select>
+                            <select class="ui-mockup-select"><option>Monthly</option></select>
+                            <input type="date" class="ui-mockup-select" placeholder="Start Date">
+                            <input type="date" class="ui-mockup-select" placeholder="End Date">
+                            <select class="ui-mockup-select"><option>All Students</option></select>
+                            <select class="ui-mockup-select"><option>All Classes</option></select>
+                            <button class="ui-mockup-btn-primary">Generate Report</button>
+                            <button class="ui-mockup-btn-secondary">Clear Filters</button>
+                        </div>
+                        <div class="ui-mockup-cards" style="margin: 20px 0;">
+                            <div class="ui-mockup-card green"><h3>4,192</h3><p>Absent</p></div>
+                            <div class="ui-mockup-card green"><h3>4,235</h3><p>Present</p></div>
+                            <div class="ui-mockup-card green"><h3>4,379</h3><p>Excused</p></div>
+                            <div class="ui-mockup-card green"><h3>4,266</h3><p>Late</p></div>
+                        </div>
+                        <div style="margin-top: 20px;">
+                            <button class="ui-mockup-btn-primary">Print Report</button>
+                            <button class="ui-mockup-btn-primary">Download PDF</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <h4>Description:</h4>
+                <p>
+                    Comprehensive reporting system for generating various reports including attendance, fees, academic 
+                    performance, and comprehensive school reports with export capabilities.
+                </p>
+                
+                <h4>Key Features:</h4>
+                <div class="feature-list">
+                    <ul>
+                        <li>Attendance reports</li>
+                        <li>Fee collection reports</li>
+                        <li>Academic performance reports</li>
+                        <li>Student progress reports</li>
+                        <li>Teacher performance reports</li>
+                        <li>Financial reports</li>
+                        <li>Comprehensive school reports</li>
+                        <li>Custom date range reports</li>
+                        <li>Export to PDF</li>
+                        <li>Export to Excel</li>
+                        <li>Print reports</li>
+                        <li>Report scheduling</li>
+                        <li>Email report delivery</li>
+                    </ul>
+                </div>
+                
+                <h4>Report Types:</h4>
+                <ul>
+                    <li><strong>Attendance Reports:</strong> Student attendance by class, date, or student</li>
+                    <li><strong>Fee Reports:</strong> Fee collection, pending, and overdue reports</li>
+                    <li><strong>Academic Reports:</strong> Exam results, grades, and performance</li>
+                    <li><strong>Financial Reports:</strong> Income, expenses, and financial summaries</li>
+                    <li><strong>Comprehensive Reports:</strong> Complete school overview reports</li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="page-break"></div>
+
+        <!-- Component 18: Profile Management -->
+        <section>
+            <div class="component-card" id="profile">
+                <h3>18. Profile Management</h3>
+                <div class="ui-mockup">
+                    <div class="ui-mockup-header">
+                        <div class="ui-mockup-title">Profile</div>
+                        <div class="ui-mockup-icons">
+                            <div class="ui-mockup-icon ui-mockup-bell">🔔</div>
+                            <div class="ui-mockup-icon ui-mockup-user">U</div>
+                        </div>
+                    </div>
+                    <div class="ui-mockup-banner" style="margin: 20px;">
+                        <h2>👤 User Profile</h2>
+                        <p>View and manage your account information</p>
+                        <div class="ui-mockup-buttons">
+                            <button class="ui-mockup-btn">Change Password</button>
+                            <button class="ui-mockup-btn">Refresh</button>
+                        </div>
+                    </div>
+                    <div style="padding: 20px; margin: 20px; background: white; border-radius: 5px;">
+                        <div style="padding: 15px; border-bottom: 1px solid #eee; display: flex; align-items: center; gap: 15px;">
+                            <div style="font-size: 1.5em;">📧</div>
+                            <div>
+                                <div style="font-weight: bold;">superadmin@school.com</div>
+                                <div style="font-size: 0.9em; color: #666;">Super Administrator</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between;">
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <div style="font-size: 1.5em;">👤</div>
+                                <div>Role:</div>
+                            </div>
+                            <div style="font-weight: bold;">Super Administrator</div>
+                        </div>
+                        <div style="padding: 15px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between;">
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <div style="font-size: 1.5em;">✓</div>
+                                <div>Account Status:</div>
+                            </div>
+                            <span class="ui-mockup-badge active">Active</span>
+                        </div>
+                        <div style="padding: 15px; display: flex; justify-content: space-between;">
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <div style="font-size: 1.5em;">📅</div>
+                                <div>Last Login:</div>
+                            </div>
+                            <div>November 17, 2025 at 12:35 PM</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h4>Description:</h4>
+                <p>
+                    User profile management system where users can view and update their personal information, change 
+                    passwords, and manage profile settings.
+                </p>
+                
+                <h4>Key Features:</h4>
+                <div class="feature-list">
+                    <ul>
+                        <li>View personal profile</li>
+                        <li>Edit profile information</li>
+                        <li>Profile picture upload</li>
+                        <li>Change password</li>
+                        <li>Update contact information</li>
+                        <li>View role and permissions</li>
+                        <li>Account settings</li>
+                        <li>Activity history</li>
+                        <li>Privacy settings</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <div class="page-break"></div>
+
+        <!-- Component 19: All Users Management -->
+        <section>
+            <div class="component-card" id="all-users">
+                <h3>19. All Users Management</h3>
+                <div class="ui-mockup">
+                    <div class="ui-mockup-header">
+                        <div class="ui-mockup-title">All Users</div>
+                        <div class="ui-mockup-icons">
+                            <div class="ui-mockup-icon ui-mockup-bell">🔔</div>
+                            <div class="ui-mockup-icon ui-mockup-user">U</div>
+                        </div>
+                    </div>
+                    <div class="ui-mockup-banner" style="margin: 20px;">
+                        <h2>👥 All Users</h2>
+                        <p>Manage all system users and their permissions</p>
+                        <div class="ui-mockup-buttons">
+                            <button class="ui-mockup-btn">Export CSV</button>
+                        </div>
+                    </div>
+                    <div class="ui-mockup-filters" style="margin: 20px;">
+                        <select class="ui-mockup-select"><option>All Role</option></select>
+                        <select class="ui-mockup-select"><option>All Status</option></select>
+                        <button class="ui-mockup-btn-primary">Apply Filters</button>
+                        <button class="ui-mockup-btn-secondary">Clear Filters</button>
+                    </div>
+                    <div class="ui-mockup-cards" style="margin: 20px;">
+                        <div class="ui-mockup-card purple"><h3>139</h3><p>Total Users</p></div>
+                        <div class="ui-mockup-card green"><h3>9</h3><p>Active Users</p></div>
+                        <div class="ui-mockup-card red"><h3>1</h3><p>Inactive Users</p></div>
+                        <div class="ui-mockup-card orange"><h3>0</h3><p>Admins</p></div>
+                    </div>
+                    <div style="padding: 20px; margin: 20px; background: white; border-radius: 5px;">
+                        <h4 style="margin-bottom: 15px;">All Users Records (139 records)</h4>
+                        <table class="ui-mockup-table">
+                            <thead>
+                                <tr><th>Email</th><th>First Name</th><th>Last Name</th><th>Role</th><th>Status</th><th>Created At</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>student10@yopmail.com</td><td>Khadija</td><td>Hassan</td><td>student</td><td><span class="ui-mockup-badge inactive">Inactive</span></td><td>10 Jan 2025</td></tr>
+                                <tr><td>student09@yopmail.com</td><td>Ibrahim</td><td>Malik</td><td>student</td><td><span class="ui-mockup-badge active">Active</span></td><td>10 Jan 2025</td></tr>
+                                <tr><td>student08@yopmail.com</td><td>Maryam</td><td>Ahmed</td><td>student</td><td><span class="ui-mockup-badge active">Active</span></td><td>10 Jan 2025</td></tr>
+                            </tbody>
+                        </table>
+                        <div style="margin-top: 15px; text-align: center; color: #666;">Showing 1 to 10 of 139 records | Page 1 of 14</div>
+                    </div>
+                </div>
+                
+                <h4>Description:</h4>
+                <p>
+                    Centralized user management system for administrators to view, manage, and control all system users 
+                    including students, teachers, and administrators.
+                </p>
+                
+                <h4>Key Features:</h4>
+                <div class="feature-list">
+                    <ul>
+                        <li>View all system users</li>
+                        <li>Filter users by role</li>
+                        <li>Search users</li>
+                        <li>View user details</li>
+                        <li>Activate/Deactivate users</li>
+                        <li>User statistics</li>
+                        <li>Bulk user operations</li>
+                        <li>User activity tracking</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <div class="page-break"></div>
+
+        <!-- Benefits Section -->
+        <section id="benefits">
+            <h1>System Benefits</h1>
+            
+            <h2>For Administrators</h2>
+            <div class="feature-list">
+                <ul>
+                    <li>Centralized management of all school operations</li>
+                    <li>Real-time insights and analytics</li>
+                    <li>Efficient fee collection and tracking</li>
+                    <li>Comprehensive reporting capabilities</li>
+                    <li>Reduced paperwork and manual processes</li>
+                    <li>Better decision-making with data-driven insights</li>
+                    <li>Improved communication with staff and parents</li>
+                    <li>Time-saving automation</li>
+                </ul>
+            </div>
+            
+            <h2>For Teachers</h2>
+            <div class="feature-list">
+                <ul>
+                    <li>Easy attendance marking</li>
+                    <li>Student performance tracking</li>
+                    <li>Exam and grade management</li>
+                    <li>Direct communication with students and parents</li>
+                    <li>Class and course management</li>
+                    <li>Leave request system</li>
+                    <li>Access to student information</li>
+                    <li>Reduced administrative burden</li>
+                </ul>
+            </div>
+            
+            <h2>For Students</h2>
+            <div class="feature-list">
+                <ul>
+                    <li>Access to academic records</li>
+                    <li>Fee payment tracking</li>
+                    <li>Exam schedules and results</li>
+                    <li>Attendance viewing</li>
+                    <li>Communication with teachers</li>
+                    <li>Notifications and announcements</li>
+                    <li>Profile management</li>
+                </ul>
+            </div>
+            
+            <h2>For Parents</h2>
+            <div class="feature-list">
+                <ul>
+                    <li>Real-time updates on child's performance</li>
+                    <li>Fee payment tracking</li>
+                    <li>Attendance notifications</li>
+                    <li>Direct communication with teachers</li>
+                    <li>Exam results and reports</li>
+                    <li>School announcements</li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="page-break"></div>
+
+        <!-- Technical Specifications -->
+        <section id="technical-specs">
+            <h1>Technical Specifications</h1>
+            
+            <h2>System Requirements</h2>
+            <table>
+                <tr>
+                    <th>Component</th>
+                    <th>Requirement</th>
+                </tr>
+                <tr>
+                    <td>Server</td>
+                    <td>Node.js v14+ or higher</td>
+                </tr>
+                <tr>
+                    <td>Database</td>
+                    <td>MongoDB v4.4+ or higher</td>
+                </tr>
+                <tr>
+                    <td>Frontend Framework</td>
+                    <td>Angular 19</td>
+                </tr>
+                <tr>
+                    <td>Browser Support</td>
+                    <td>Chrome, Firefox, Safari, Edge (Latest versions)</td>
+                </tr>
+                <tr>
+                    <td>Operating System</td>
+                    <td>Windows, Linux, macOS</td>
+                </tr>
+                <tr>
+                    <td>RAM</td>
+                    <td>Minimum 4GB (8GB recommended)</td>
+                </tr>
+                <tr>
+                    <td>Storage</td>
+                    <td>Minimum 10GB free space</td>
+                </tr>
+            </table>
+            
+            <h2>Security Features</h2>
+            <div class="feature-list">
+                <ul>
+                    <li>JWT-based authentication</li>
+                    <li>Password encryption (bcrypt)</li>
+                    <li>Role-based access control (RBAC)</li>
+                    <li>XSS protection</li>
+                    <li>SQL injection prevention</li>
+                    <li>Data sanitization</li>
+                    <li>Rate limiting</li>
+                    <li>Secure file uploads</li>
+                    <li>HTTPS support</li>
+                    <li>Session management</li>
+                </ul>
+            </div>
+            
+            <h2>API Features</h2>
+            <div class="feature-list">
+                <ul>
+                    <li>RESTful API architecture</li>
+                    <li>Swagger/OpenAPI documentation</li>
+                    <li>API versioning</li>
+                    <li>Error handling</li>
+                    <li>Request validation</li>
+                    <li>Response formatting</li>
+                    <li>Pagination support</li>
+                    <li>Filtering and sorting</li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="page-break"></div>
+
+        <!-- Implementation Timeline -->
+        <section id="implementation">
+            <h1>Implementation Timeline</h1>
+            
+            <h2>Phase 1: Setup & Configuration (Week 1-2)</h2>
+            <ul>
+                <li>Server setup and configuration</li>
+                <li>Database installation and setup</li>
+                <li>Environment configuration</li>
+                <li>Initial data migration</li>
+                <li>Domain and hosting setup</li>
+            </ul>
+            
+            <h2>Phase 2: Training & Testing (Week 3-4)</h2>
+            <ul>
+                <li>User training sessions</li>
+                <li>System testing and QA</li>
+                <li>Bug fixes and improvements</li>
+                <li>Performance optimization</li>
+                <li>User acceptance testing</li>
+            </ul>
+            
+            <h2>Phase 3: Go-Live & Support (Week 5+)</h2>
+            <ul>
+                <li>System deployment</li>
+                <li>Data migration</li>
+                <li>Go-live support</li>
+                <li>Monitoring and maintenance</li>
+                <li>Ongoing support and updates</li>
+            </ul>
+        </section>
+
+        <div class="page-break"></div>
+
+        <!-- Support & Maintenance -->
+        <section id="support">
+            <h1>Support & Maintenance</h1>
+            
+            <h2>Support Services</h2>
+            <div class="feature-list">
+                <ul>
+                    <li>24/7 technical support</li>
+                    <li>Email and phone support</li>
+                    <li>Remote assistance</li>
+                    <li>User training and documentation</li>
+                    <li>Regular system updates</li>
+                    <li>Security patches</li>
+                    <li>Feature enhancements</li>
+                    <li>Backup and recovery</li>
+                </ul>
+            </div>
+            
+            <h2>Maintenance Services</h2>
+            <div class="feature-list">
+                <ul>
+                    <li>Regular system backups</li>
+                    <li>Database optimization</li>
+                    <li>Performance monitoring</li>
+                    <li>Security audits</li>
+                    <li>Bug fixes and patches</li>
+                    <li>Feature updates</li>
+                    <li>Server maintenance</li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="page-break"></div>
+
+        <!-- Conclusion -->
+        <section>
+            <h1>Conclusion</h1>
+            <p>
+                This School Management System provides a comprehensive, modern, and efficient solution for managing 
+                all aspects of educational institution operations. With its user-friendly interface, robust features, 
+                and secure architecture, it is designed to streamline school management processes and improve overall 
+                efficiency.
+            </p>
+            <p>
+                The system is scalable, secure, and built with modern technologies to ensure long-term reliability 
+                and performance. Our commitment to continuous improvement and support ensures that your school will 
+                have a system that grows with your needs.
+            </p>
+            
+            <div class="highlight-box">
+                <h4>Why Choose Our System?</h4>
+                <ul>
+                    <li>✅ Complete solution covering all school operations</li>
+                    <li>✅ Modern and intuitive user interface</li>
+                    <li>✅ Secure and reliable architecture</li>
+                    <li>✅ Scalable and customizable</li>
+                    <li>✅ Comprehensive support and maintenance</li>
+                    <li>✅ Regular updates and improvements</li>
+                    <li>✅ Cost-effective solution</li>
+                    <li>✅ Proven track record</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <div class="footer">
+            <h3>Contact Information</h3>
+            <p>For more information or to schedule a demo, please contact us:</p>
+            <p>Email: <a href="mailto:kashifshah5898@gmail.com">kashifshah5898@gmail.com</a></p>
+            <p>Phone: +92 312 6292779</p>
+            <a href="https://wa.me/923126292779" target="_blank" class="whatsapp-icon">
+                Chat on WhatsApp
+            </a>
+            <p style="margin-top: 30px;">© 2025 School Management System. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        // Set current date
+        document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+        });
+        
+        // Smooth scrolling for Table of Contents links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Calculate offset for better positioning
+                    const offset = 80;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - offset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Highlight the target section briefly
+                    targetElement.style.transition = 'background-color 0.3s';
+                    targetElement.style.backgroundColor = '#fff3cd';
+                    setTimeout(() => {
+                        targetElement.style.backgroundColor = '';
+                    }, 2000);
+                }
+            });
+        });
+        
+        // Add back to top button
+        const backToTopBtn = document.createElement('button');
+        backToTopBtn.id = 'back-to-top';
+        backToTopBtn.innerHTML = '↑';
+        backToTopBtn.setAttribute('aria-label', 'Back to top');
+        document.body.appendChild(backToTopBtn);
+        
+        // Show/hide back to top button on scroll
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+        
+        // Scroll to top on click
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
