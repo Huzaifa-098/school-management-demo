@@ -823,6 +823,483 @@
             font-size: 0.9em;
             margin: 5px;
         }
+        
+        /* Mobile Responsive Styles */
+        @media screen and (max-width: 768px) {
+            body {
+                font-size: 14px;
+            }
+            
+            .container {
+                max-width: 100%;
+                margin: 0;
+            }
+            
+            /* Cover Page Mobile */
+            .cover-page {
+                padding: 40px 20px;
+                min-height: auto;
+            }
+            
+            .cover-logo {
+                font-size: 3em;
+                margin-bottom: 15px;
+            }
+            
+            .cover-page h1 {
+                font-size: 2em;
+                margin-bottom: 15px;
+            }
+            
+            .cover-page h2 {
+                font-size: 1.3em;
+                margin-bottom: 20px;
+            }
+            
+            .cover-page .subtitle {
+                font-size: 1em;
+            }
+            
+            /* Header Mobile */
+            div[style*="display: flex"] {
+                flex-direction: column !important;
+                padding: 15px !important;
+                text-align: center !important;
+            }
+            
+            div[style*="display: flex"] .cover-logo {
+                margin-bottom: 10px;
+            }
+            
+            div[style*="display: flex"] h1 {
+                font-size: 1.5em !important;
+            }
+            
+            /* TOC Mobile */
+            .toc-page {
+                padding: 20px 15px;
+            }
+            
+            .toc-container {
+                padding: 20px 15px;
+                margin-top: 10px;
+            }
+            
+            .toc-header h1 {
+                font-size: 1.5em;
+            }
+            
+            .toc-list-item {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 10px 0;
+            }
+            
+            .toc-item-dots {
+                display: none;
+            }
+            
+            .toc-item-page {
+                margin-top: 5px;
+                text-align: left;
+            }
+            
+            /* Sections Mobile */
+            section {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+                margin-bottom: 20px;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+                margin: 30px 0 15px 0;
+                padding-left: 10px;
+            }
+            
+            h3 {
+                font-size: 1.2em;
+                margin: 20px 0 10px 0;
+            }
+            
+            p {
+                font-size: 1em;
+                text-align: left;
+            }
+            
+            /* Component Cards Mobile */
+            .component-card {
+                padding: 20px 15px;
+                margin: 20px 0;
+            }
+            
+            .component-card h3 {
+                font-size: 1.4em;
+            }
+            
+            /* UI Mockup Mobile */
+            .ui-mockup {
+                margin: 15px 0;
+            }
+            
+            .ui-mockup-header {
+                padding: 10px 15px;
+                flex-wrap: wrap;
+            }
+            
+            .ui-mockup-title {
+                font-size: 1.1em;
+            }
+            
+            .ui-mockup-banner {
+                padding: 20px 15px;
+                margin: 15px;
+            }
+            
+            .ui-mockup-banner h2 {
+                font-size: 1.4em;
+                margin: 0 0 8px 0;
+            }
+            
+            .ui-mockup-buttons {
+                flex-wrap: wrap;
+                gap: 8px;
+                margin-top: 10px;
+            }
+            
+            .ui-mockup-btn {
+                padding: 6px 12px;
+                font-size: 0.85em;
+            }
+            
+            .ui-mockup-cards {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+                margin: 15px;
+            }
+            
+            .ui-mockup-card {
+                padding: 15px;
+            }
+            
+            .ui-mockup-card h3 {
+                font-size: 1.5em;
+            }
+            
+            .ui-mockup-card p {
+                font-size: 0.85em;
+            }
+            
+            /* Filters Mobile */
+            .ui-mockup-filters {
+                flex-direction: column;
+                padding: 15px;
+                gap: 10px;
+            }
+            
+            .ui-mockup-select {
+                width: 100%;
+                padding: 10px;
+            }
+            
+            .ui-mockup-btn-primary,
+            .ui-mockup-btn-secondary {
+                width: 100%;
+                padding: 10px;
+            }
+            
+            /* Tables Mobile - Wrapper for scrollable tables */
+            div[style*="padding: 20px"] {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                position: relative;
+                max-width: 100%;
+            }
+            
+            /* Any div containing a table should be scrollable */
+            div:has(table),
+            div:has(.ui-mockup-table) {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                width: 100%;
+            }
+            
+            /* Fallback for browsers that don't support :has() */
+            @supports not selector(:has(*)) {
+                div[style*="padding: 20px"] table,
+                div[style*="padding: 20px"] .ui-mockup-table {
+                    display: block;
+                    overflow-x: auto;
+                }
+            }
+            
+            /* Tables Mobile */
+            .ui-mockup-table {
+                width: 100%;
+                min-width: 600px;
+                display: table;
+                border-collapse: collapse;
+                margin: 0;
+            }
+            
+            .ui-mockup-table thead {
+                display: table-header-group;
+            }
+            
+            .ui-mockup-table tbody {
+                display: table-row-group;
+            }
+            
+            .ui-mockup-table tr {
+                display: table-row;
+            }
+            
+            .ui-mockup-table th,
+            .ui-mockup-table td {
+                padding: 10px 8px;
+                font-size: 0.85em;
+                word-wrap: break-word;
+                white-space: normal;
+                display: table-cell;
+                text-align: left;
+            }
+            
+            .ui-mockup-table th {
+                background: #667eea;
+                color: white;
+                font-weight: 600;
+                position: sticky;
+                top: 0;
+                z-index: 10;
+            }
+            
+            /* Regular Tables Mobile */
+            table {
+                width: 100%;
+                min-width: 600px;
+                display: table;
+                border-collapse: collapse;
+            }
+            
+            table thead {
+                display: table-header-group;
+            }
+            
+            table tbody {
+                display: table-row-group;
+            }
+            
+            table tr {
+                display: table-row;
+            }
+            
+            table th,
+            table td {
+                padding: 10px 8px;
+                font-size: 0.85em;
+                word-wrap: break-word;
+                white-space: normal;
+                display: table-cell;
+                text-align: left;
+            }
+            
+            table th {
+                background: #667eea;
+                color: white;
+                font-weight: 600;
+                position: sticky;
+                top: 0;
+                z-index: 10;
+            }
+            
+            /* Table container wrapper */
+            .table-wrapper {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                width: 100%;
+                margin: 15px 0;
+            }
+            
+            .table-wrapper::-webkit-scrollbar {
+                height: 8px;
+            }
+            
+            .table-wrapper::-webkit-scrollbar-track {
+                background: #f1f1f1;
+                border-radius: 10px;
+            }
+            
+            .table-wrapper::-webkit-scrollbar-thumb {
+                background: #667eea;
+                border-radius: 10px;
+            }
+            
+            .table-wrapper::-webkit-scrollbar-thumb:hover {
+                background: #764ba2;
+            }
+            
+            /* Chat Mobile */
+            .ui-mockup-chat {
+                flex-direction: column;
+                height: auto;
+            }
+            
+            .ui-mockup-chat-sidebar {
+                width: 100%;
+                max-height: 200px;
+                overflow-y: auto;
+            }
+            
+            .ui-mockup-chat-main {
+                min-height: 400px;
+            }
+            
+            /* Sidebar Mockup Mobile */
+            .ui-mockup-sidebar {
+                width: 100%;
+                float: none;
+                min-height: auto;
+            }
+            
+            .ui-mockup-content {
+                margin-left: 0;
+                width: 100%;
+            }
+            
+            /* Payment Section Mobile */
+            div[style*="max-width: 600px"] {
+                max-width: 100% !important;
+                padding: 20px 15px !important;
+                margin: 15px !important;
+            }
+            
+            /* Badge Mobile */
+            .badge {
+                padding: 4px 10px;
+                font-size: 0.8em;
+                margin: 3px;
+            }
+            
+            .ui-mockup-badge {
+                padding: 4px 10px;
+                font-size: 0.75em;
+            }
+            
+            /* Tech Specs Mobile */
+            .tech-specs {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            /* Highlight Box Mobile */
+            .highlight-box {
+                padding: 15px;
+                margin: 15px 0;
+            }
+            
+            /* Footer Mobile */
+            .footer {
+                padding: 20px 15px;
+            }
+            
+            /* Back to Top Button Mobile */
+            #back-to-top {
+                width: 45px;
+                height: 45px;
+                bottom: 20px;
+                right: 20px;
+                font-size: 20px;
+            }
+            
+            /* Feature List Mobile */
+            .feature-list {
+                padding: 15px;
+            }
+            
+            ul, ol {
+                margin-left: 20px;
+            }
+            
+            li {
+                font-size: 0.95em;
+                margin-bottom: 8px;
+            }
+        }
+        
+        @media screen and (max-width: 480px) {
+            /* Extra Small Mobile */
+            .cover-logo {
+                font-size: 2.5em;
+            }
+            
+            .cover-page h1 {
+                font-size: 1.5em;
+            }
+            
+            .cover-page h2 {
+                font-size: 1.1em;
+            }
+            
+            section {
+                padding: 20px 15px;
+            }
+            
+            h1 {
+                font-size: 1.5em;
+            }
+            
+            h2 {
+                font-size: 1.2em;
+            }
+            
+            h3 {
+                font-size: 1.1em;
+            }
+            
+            .ui-mockup-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .ui-mockup-banner h2 {
+                font-size: 1.2em;
+            }
+            
+            .toc-header h1 {
+                font-size: 1.3em;
+            }
+            
+            .component-card h3 {
+                font-size: 1.2em;
+            }
+            
+            .ui-mockup-table {
+                min-width: 500px;
+            }
+            
+            .ui-mockup-table th,
+            .ui-mockup-table td {
+                font-size: 0.75em;
+                padding: 8px 5px;
+            }
+            
+            table {
+                min-width: 500px;
+            }
+            
+            table th,
+            table td {
+                font-size: 0.75em;
+                padding: 8px 5px;
+            }
+            
+            /* Table wrapper for very small screens */
+            div[style*="padding: 20px"] {
+                padding: 15px 10px !important;
+            }
+        }
     </style>
 </head>
 <body>
